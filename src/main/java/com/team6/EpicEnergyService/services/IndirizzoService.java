@@ -1,6 +1,5 @@
 package com.team6.EpicEnergyService.services;
 
-import com.team6.EpicEnergyService.entities.Comune;
 import com.team6.EpicEnergyService.entities.Indirizzo;
 import com.team6.EpicEnergyService.exceptions.NotFoundException;
 import com.team6.EpicEnergyService.payloads.IndirizzoDTO;
@@ -27,13 +26,11 @@ public class IndirizzoService {
     }
 
     public Indirizzo saveIndirizzo(IndirizzoDTO payload) {
-        Comune comune = comuneRepository.findById(payload.comuneId()).orElseThrow(() -> new RuntimeException("Comune con ID: " + payload.comuneId() + " non è stato trovato!"));
         Indirizzo indirizzo = new Indirizzo();
         indirizzo.setVia(payload.via());
         indirizzo.setCivico(payload.civico());
         indirizzo.setCap(payload.cap());
         indirizzo.setLocalita(payload.localita());
-        indirizzo.setComune(comune);
 
         Indirizzo savedIndirizzo = indirizzoRepository.save(indirizzo);
         log.info("Nuovo indirizzo salvato con successo: " + savedIndirizzo.getId());

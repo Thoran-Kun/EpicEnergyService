@@ -17,6 +17,6 @@ public interface ClienteRepository extends JpaRepository<Cliente, UUID> {
     List<Cliente> findByDataUltimoContatto(LocalDate dataUltimoContatto);
 
     //TODO: questa query è da sistemare
-    List<Cliente> findByName(String nomeParziale);
+    //List<Cliente> findByName(String nomeParziale);
 
 }
