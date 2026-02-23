@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Repository
-public interface ClienteRepo extends JpaRepository<Cliente, UUID> {
+public interface ClienteRepository extends JpaRepository<Cliente, UUID> {
     List<Cliente> findByFatturatoAnnuale(double fatturato);
 
     List<Cliente> findByDataInserimento(LocalDate dataInserimento);
