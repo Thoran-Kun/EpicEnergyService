@@ -1,8 +1,5 @@
 package com.team6.EpicEnergyService.services;
 
-import com.team6.EpicEnergyService.entities.Comune;
-import com.team6.EpicEnergyService.entities.Indirizzo;
-import com.team6.EpicEnergyService.payload.IndirizzoDTO;
 import com.team6.EpicEnergyService.repositories.IndirizzoRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

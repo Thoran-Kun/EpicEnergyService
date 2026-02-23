@@ -1,6 +1,7 @@
 package com.team6.EpicEnergyService.security;
 
 import com.team6.EpicEnergyService.entities.Utente;
+import com.team6.EpicEnergyService.exceptions.UnauthorizedException;
 import com.team6.EpicEnergyService.services.UtenteService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

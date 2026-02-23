@@ -16,5 +16,5 @@ public record IndirizzoDTO(
         int cap,
         @NotNull(message = "l'ID del comune è obbligatorio")
         UUID comuneId
-        ) {
+) {
 }
