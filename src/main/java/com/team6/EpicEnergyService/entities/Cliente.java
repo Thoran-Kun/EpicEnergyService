@@ -35,7 +35,7 @@ public class Cliente {
     private int telefonoContatto;
     private String logoAziendale;
     @OneToMany(mappedBy = "cliente")
-    private List<Indirizzi> listaIndirizzi;
+    private List<indirizzo> listaIndirizzi;
     @OneToMany(mappedBy = "cliente")
     private List<Fattura> listaFatture;
 

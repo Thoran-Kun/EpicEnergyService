@@ -1,4 +1,5 @@
 package com.team6.EpicEnergyService.entities;
 
-public class Indirizzi {
+public enum TIpoSede {
+    LEGALE, OPERATIVA
 }
