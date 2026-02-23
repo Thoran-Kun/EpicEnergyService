@@ -1,4 +1,4 @@
-package com.team6.EpicEnergyService.payload;
+package com.team6.EpicEnergyService.payloads;
 
 import com.team6.EpicEnergyService.entities.RagioneSociale;
 
