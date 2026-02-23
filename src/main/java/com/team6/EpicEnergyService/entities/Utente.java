@@ -36,15 +36,13 @@ public class Utente {
     @Enumerated(EnumType.STRING)
     private TipoUtente tipoUtente;
 
-    public Utente(UUID id, String username, String email, String password,
-                  String nome, String cognome, String avatar, TipoUtente tipoUtente) {
-        this.id = id;
+    public Utente(String username, String email, String password,
+                  String nome, String cognome, TipoUtente tipoUtente) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.nome = nome;
         this.cognome = cognome;
-        this.avatar = avatar;
         this.tipoUtente = tipoUtente;
     }
 }

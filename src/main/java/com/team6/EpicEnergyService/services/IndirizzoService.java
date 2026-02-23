@@ -26,7 +26,7 @@ public class IndirizzoService {
         this.comuneRepository = comuneRepository;
     }
 
-    public Indirizzo saveIndirizzo(IndirizzoDTO payload){
+    public Indirizzo saveIndirizzo(IndirizzoDTO payload) {
         Comune comune = comuneRepository.findById(payload.comuneId()).orElseThrow(() -> new RuntimeException("Comune con ID: " + payload.comuneId() + " non è stato trovato!"));
         Indirizzo indirizzo = new Indirizzo();
         indirizzo.setVia(payload.via());
@@ -44,7 +44,7 @@ public class IndirizzoService {
         return indirizzoRepository.findAll(pageable);
     }
 
-    public Indirizzo findById(UUID id){
-        return indirizzoRepository.findById(id).orElseThrow(() -> new NotFoundException("indirizzo non trovato!"));
+    public Indirizzo findById(UUID id) {
+        return indirizzoRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
 }
