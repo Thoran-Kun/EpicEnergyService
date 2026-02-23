@@ -1,9 +1,12 @@
 package com.team6.EpicEnergyService.entities;
 
-import jakarta.persistence.*;
-import lombok.*;
 
-import java.math.BigInteger;
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.time.LocalDate;
 import java.util.UUID;
 
@@ -12,7 +15,6 @@ import java.util.UUID;
 @ToString
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "fatture")
 public class Fattura {
     @Id
@@ -21,9 +23,12 @@ public class Fattura {
 
     private LocalDate data;
 
-    private BigInteger importo;
+    private double importo;
 
-    private BigInteger numero;
+    // incremento automaticamente il numero della fattura
+    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int numero;
 
     @ManyToOne
     @JoinColumn(name = "fatture_id", nullable = false)
@@ -31,6 +36,14 @@ public class Fattura {
 
     @ManyToOne
     @JoinColumn(name = "stato_fatture", nullable = false)
-    private StatoFattura stato;
+    @Enumerated(EnumType.STRING)
+    private EnumStatoFattura statoFattura;
 
+    public Fattura(double importo, Cliente cliente) {
+        this.data = LocalDate.now();
+        this.importo = importo;
+        this.cliente = cliente;
+        this.statoFattura = EnumStatoFattura.IN_CARICO;
+        // assegno lo stato della fattura direttamente durante la creazione
+    }
 }
