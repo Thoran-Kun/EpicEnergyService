@@ -1,7 +1,10 @@
 package com.team6.EpicEnergyService.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
@@ -9,6 +12,7 @@ import java.util.UUID;
 @Table(name = "utenti")
 @NoArgsConstructor
 @Builder
+@Getter
 public class Utente {
 
     @Id
@@ -18,6 +22,7 @@ public class Utente {
     @Column(nullable = false, unique = true)
     private String username;
 
+    @Getter(AccessLevel.NONE)
     @Column(nullable = false, unique = true)
     private String email;
 
@@ -30,6 +35,7 @@ public class Utente {
 
     @Enumerated(EnumType.STRING)
     private TipoUtente tipoUtente;
+
     public Utente(UUID id, String username, String email, String password,
                   String nome, String cognome, String avatar, TipoUtente tipoUtente) {
         this.id = id;
