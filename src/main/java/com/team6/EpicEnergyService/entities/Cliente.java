@@ -37,7 +37,7 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente")
     private List<Indirizzi> listaIndirizzi;
     @OneToMany(mappedBy = "cliente")
-    private List<Fatture> listaFatture;
+    private List<Fattura> listaFatture;
 
     public Cliente(String nomeContatto, String cognomeContatto, String emailContatto, RagioneSociale ragioneSociale, String partitaIva) {
         this.nomeContatto = nomeContatto;
