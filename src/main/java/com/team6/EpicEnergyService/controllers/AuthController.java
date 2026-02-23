@@ -4,6 +4,7 @@ import com.team6.EpicEnergyService.entities.Utente;
 import com.team6.EpicEnergyService.exceptions.ValidationException;
 import com.team6.EpicEnergyService.payloads.LoginDTO;
 import com.team6.EpicEnergyService.payloads.LoginResponseDTO;
+import com.team6.EpicEnergyService.payloads.UtentiDTO;
 import com.team6.EpicEnergyService.services.AuthService;
 import com.team6.EpicEnergyService.services.UtenteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class AuthController {
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public Utente createUtente(@RequestBody @Validated UtenteDTO payload, BindingResult validationResult){
+    public Utente createUtente(@RequestBody @Validated UtentiDTO payload, BindingResult validationResult){
         if(validationResult.hasErrors()){
             List<String> errorList = validationResult.getFieldErrors()
                     .stream()
