@@ -1,6 +1,7 @@
 package com.team6.EpicEnergyService.services;
 
 import com.team6.EpicEnergyService.entities.Utente;
+import com.team6.EpicEnergyService.exceptions.UnauthorizedException;
 import com.team6.EpicEnergyService.payloads.LoginDTO;
 import com.team6.EpicEnergyService.security.JWTTools;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,5 +23,12 @@ public class AuthService {
 
     public String checkCredentialAndGenerateToken(LoginDTO body){
         Utente found = this.utenteService.findByEmail(body.email());
+
+        if(bcrypt.matches(body.password(), found.getPassword())){
+            String accessToken = jwtTools.generateToken(found);
+            return accessToken;
+        } else {
+            throw new UnauthorizedException("Le tue credenziali sono errate!");
+        }
     }
 }
