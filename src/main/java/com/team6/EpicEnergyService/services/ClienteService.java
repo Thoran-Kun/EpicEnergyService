@@ -1,7 +1,7 @@
 package com.team6.EpicEnergyService.services;
 
 import com.team6.EpicEnergyService.entities.Cliente;
-import com.team6.EpicEnergyService.payload.ClientiDTO;
+import com.team6.EpicEnergyService.payloads.ClientiDTO;
 import com.team6.EpicEnergyService.repositories.ClienteRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

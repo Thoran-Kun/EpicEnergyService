@@ -11,8 +11,7 @@ import java.util.UUID;
 
 @Service
 public class FatturaService {
-    private final ClienteRepository clienteRepository;
-    private final StatoFatturaRepository statoFatturaRepository;
+
     private FatturaRepository fatturaRepository;
 
 
