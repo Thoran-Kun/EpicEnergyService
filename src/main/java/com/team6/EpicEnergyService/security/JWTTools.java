@@ -1,12 +1,14 @@
 package com.team6.EpicEnergyService.security;
 
 import com.team6.EpicEnergyService.entities.Utente;
+import com.team6.EpicEnergyService.exceptions.UnauthorizedException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.UUID;
 
 @Component
 public class JWTTools {
@@ -31,9 +33,9 @@ public class JWTTools {
         }
     }
 
-    public long getId(String token) {
+    public UUID getId(String token) {
         try {
-            return Long.parseLong(Jwts.parser().verifyWith(Keys.hmacShaKeyFor(secret.getBytes())).build().parseSignedClaims(token).getPayload().getSubject());
+            return UUID.fromString(Jwts.parser().verifyWith(Keys.hmacShaKeyFor(secret.getBytes())).build().parseSignedClaims(token).getPayload().getSubject());
         } catch (Exception ex) {
             throw new UnauthorizedException("Qualcosa non ha funzionato, prova di nuovo.");
         }
