@@ -15,7 +15,7 @@ import java.util.UUID;
 public class StatoFattura {
     @Id
     @GeneratedValue
-    private UUID id;
+    private UUID id_stato_fatture;
 
     @Enumerated(EnumType.STRING)
     private EnumStatoFattura stato;

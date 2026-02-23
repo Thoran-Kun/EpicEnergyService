@@ -17,7 +17,7 @@ import java.util.UUID;
 public class Fattura {
     @Id
     @GeneratedValue
-    private UUID id;
+    private UUID id_fatture;
 
     private LocalDate data;
 
