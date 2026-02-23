@@ -2,7 +2,10 @@ package com.team6.EpicEnergyService.entities;
 
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.UUID;
 
@@ -11,7 +14,6 @@ import java.util.UUID;
 @ToString
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "province")
 public class Provincia {
     @Id
@@ -26,4 +28,9 @@ public class Provincia {
     @JoinColumn(name = "provincia_id", nullable = false)
     private Comune comune;
 
+    public Provincia(String nome, String sigla, Comune comune) {
+        this.nome = nome;
+        this.sigla = sigla;
+        this.comune = comune;
+    }
 }
