@@ -8,17 +8,17 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ClienteService {
-    private ClienteRepo clienteRepo;
+    private ClienteRepository clienteRepository;
 
     @Autowired
-    public ClienteService(ClienteRepo clienteRepo) {
-        this.clienteRepo = clienteRepo;
+    public ClienteService(ClienteRepository clienteRepository) {
+        this.clienteRepository = clienteRepository;
     }
 
     public Cliente save(ClientiDTO payload) {
         //TODO: controlli sull'esistenza del cliente
         Cliente nuovoCliente = new Cliente(payload.nomeContatto(), payload.cognomeContatto(), payload.emailContatto(), payload.ragioneSociale(), payload.partitaIva());
-        this.clienteRepo.save(nuovoCliente);
+        this.clienteRepository.save(nuovoCliente);
         return nuovoCliente;
     }
 }
