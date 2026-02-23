@@ -2,21 +2,22 @@ package com.team6.EpicEnergyService.entities;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.UUID;
 
 @Entity
 @Table(name = "utenti")
 @NoArgsConstructor
-@Builder
 @Getter
+@Setter
 public class Utente {
 
     @Id
     @GeneratedValue
+    @Setter(AccessLevel.NONE)
     private UUID id;
 
     @Column(nullable = false, unique = true)
@@ -27,6 +28,7 @@ public class Utente {
     private String email;
 
     @Column(nullable = false)
+    @Getter(AccessLevel.NONE)
     private String password;
 
     private String nome;

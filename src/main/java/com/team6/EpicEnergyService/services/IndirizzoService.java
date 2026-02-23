@@ -4,7 +4,6 @@ import com.team6.EpicEnergyService.entities.Comune;
 import com.team6.EpicEnergyService.entities.Indirizzo;
 import com.team6.EpicEnergyService.exceptions.NotFoundException;
 import com.team6.EpicEnergyService.payloads.IndirizzoDTO;
-import com.team6.EpicEnergyService.repositories.ComuneRepository;
 import com.team6.EpicEnergyService.repositories.IndirizzoRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,7 @@ public class IndirizzoService {
         this.comuneService = comuneService;
     }
 
-    public Indirizzo saveIndirizzo(IndirizzoDTO payload){
+    public Indirizzo saveIndirizzo(IndirizzoDTO payload) {
         Comune comune = comuneService.findById(payload.comuneId());
         Indirizzo indirizzo = new Indirizzo();
         indirizzo.setVia(payload.via());
@@ -44,7 +43,7 @@ public class IndirizzoService {
         return indirizzoRepository.findAll(pageable);
     }
 
-    public Indirizzo findById(UUID id){
-        return indirizzoRepository.findById(id).orElseThrow(() -> new NotFoundException("indirizzo non trovato!"));
+    public Indirizzo findById(UUID id) {
+        return indirizzoRepository.findById(id).orElseThrow(() -> new NotFoundException(id));
     }
 }
