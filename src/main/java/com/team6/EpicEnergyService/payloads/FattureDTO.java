@@ -1,5 +1,6 @@
 package com.team6.EpicEnergyService.payloads;
 
+import com.team6.EpicEnergyService.entities.EnumStatoFattura;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -13,7 +14,10 @@ public record FattureDTO(
         @Max(value = 100000, message = "Attenzione! L'importo massimo è 100000.")
         double importo,
         @NotNull(message = "Attenzione! L'ID del cliente è obbligatorio.")
-        UUID clienteId
+        UUID clienteId,
+        @NotNull(message = "Lo stato della fattura è obbligatorio.")
+        EnumStatoFattura stato
+
 
 ) {
 }
