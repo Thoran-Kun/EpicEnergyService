@@ -1,7 +1,9 @@
 package com.team6.EpicEnergyService.exceptions;
 
+import java.util.UUID;
+
 public class NotFoundException extends RuntimeException {
-    public NotFoundException(String id) {
+    public NotFoundException(UUID id) {
         super("La risorsa con id " + id + " non è stata trovata");
     }
 }

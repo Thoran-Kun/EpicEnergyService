@@ -16,9 +16,11 @@ public record UtentiDTO(
         @Email(message = "Email non valida")
         @NotBlank(message = "Email obbligatoria")
         String email,
-
+        @NotBlank
+        String password,
         String nome,
         String cognome,
         String avatar,
         TipoUtente tipoUtente
-) {}
+) {
+}
