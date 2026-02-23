@@ -1,11 +1,16 @@
 package com.team6.EpicEnergyService.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -13,7 +18,8 @@ import java.util.UUID;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Utente {
+@JsonIgnoreProperties({"password", "accountNonExpired", "accountNonLocked", "authorities", "credentialsNonExpired", "enabled"})
+public class Utente implements UserDetails {
 
     @Id
     @GeneratedValue
@@ -28,7 +34,6 @@ public class Utente {
     private String email;
 
     @Column(nullable = false)
-    @Getter(AccessLevel.NONE)
     private String password;
 
     private String nome;
@@ -46,6 +51,11 @@ public class Utente {
         this.nome = nome;
         this.cognome = cognome;
         this.tipoUtente = tipoUtente;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
     }
 }
 
