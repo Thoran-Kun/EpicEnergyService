@@ -4,6 +4,7 @@ import com.team6.EpicEnergyService.entities.Comune;
 import com.team6.EpicEnergyService.entities.Indirizzo;
 import com.team6.EpicEnergyService.exceptions.NotFoundException;
 import com.team6.EpicEnergyService.payloads.IndirizzoDTO;
+import com.team6.EpicEnergyService.repositories.ComuneRepository;
 import com.team6.EpicEnergyService.repositories.IndirizzoRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,16 +18,16 @@ import java.util.UUID;
 @Slf4j
 public class IndirizzoService {
     private final IndirizzoRepository indirizzoRepository;
-    private final ComuneService comuneService;
+    private final ComuneRepository comuneRepository;
 
     @Autowired
-    public IndirizzoService(IndirizzoRepository indirizzoRepository, ComuneService comuneService) {
+    public IndirizzoService(IndirizzoRepository indirizzoRepository, ComuneRepository comuneRepository) {
         this.indirizzoRepository = indirizzoRepository;
-        this.comuneService = comuneService;
+        this.comuneRepository = comuneRepository;
     }
 
     public Indirizzo saveIndirizzo(IndirizzoDTO payload) {
-        Comune comune = comuneService.findById(payload.comuneId());
+        Comune comune = comuneRepository.findById(payload.comuneId()).orElseThrow(() -> new RuntimeException("Comune con ID: " + payload.comuneId() + " non è stato trovato!"));
         Indirizzo indirizzo = new Indirizzo();
         indirizzo.setVia(payload.via());
         indirizzo.setCivico(payload.civico());

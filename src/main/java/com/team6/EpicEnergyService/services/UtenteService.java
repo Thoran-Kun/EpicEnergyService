@@ -4,6 +4,8 @@ import com.team6.EpicEnergyService.entities.Utente;
 import com.team6.EpicEnergyService.exceptions.NotFoundException;
 import com.team6.EpicEnergyService.payloads.UtentiDTO;
 import com.team6.EpicEnergyService.repositories.UtenteRepo;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,5 +33,9 @@ public class UtenteService {
         Utente nuovoUtente = new Utente(payload.username(), payload.email(), payload.password(), payload.nome(), payload.cognome(), payload.tipoUtente());
         this.utenteRepo.save(nuovoUtente);
         return nuovoUtente;
+    }
+
+    public Utente findByEmail( String email) {
+        return utenteRepo.findByEmail(email).orElseThrow(() -> new NotFoundException("l'utente con la email: " + email + " non è stato trovato!"));
     }
 }
