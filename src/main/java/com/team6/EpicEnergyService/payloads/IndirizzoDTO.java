@@ -1,4 +1,4 @@
-package com.team6.EpicEnergyService.payload;
+package com.team6.EpicEnergyService.payloads;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -16,5 +16,5 @@ public record IndirizzoDTO(
         int cap,
         @NotNull(message = "l'ID del comune è obbligatorio")
         UUID comuneId
-        ) {
+) {
 }
