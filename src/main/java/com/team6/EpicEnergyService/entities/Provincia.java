@@ -1,7 +1,10 @@
 package com.team6.EpicEnergyService.entities;
 
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -23,14 +26,12 @@ public class Provincia {
     private String nome;
 
     private String sigla;
+//    @OneToMany
+//    @JoinColumn(name = "provincia_id", nullable = false)
+//    private List<Comune> listaComuni;
 
-    @OneToMany
-    @JoinColumn(name = "provincia_id", nullable = false)
-    private Comune comune;
-
-    public Provincia(String nome, String sigla, Comune comune) {
+    public Provincia(String nome, String sigla) {
         this.nome = nome;
         this.sigla = sigla;
-        this.comune = comune;
     }
 }
