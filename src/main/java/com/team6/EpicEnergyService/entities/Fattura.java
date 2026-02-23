@@ -25,9 +25,7 @@ public class Fattura {
 
     private double importo;
 
-    // incremento automaticamente il numero della fattura
     @Column(nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int numero;
 
     @ManyToOne
@@ -36,14 +34,12 @@ public class Fattura {
 
     @ManyToOne
     @JoinColumn(name = "stato_fatture", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private EnumStatoFattura statoFattura;
+    private StatoFattura statoFattura;
 
-    public Fattura(double importo, Cliente cliente) {
+    public Fattura(double importo, Cliente cliente, StatoFattura statoFattura) {
         this.data = LocalDate.now();
         this.importo = importo;
         this.cliente = cliente;
-        this.statoFattura = EnumStatoFattura.IN_CARICO;
-        // assegno lo stato della fattura direttamente durante la creazione
+        this.statoFattura = statoFattura;
     }
 }
