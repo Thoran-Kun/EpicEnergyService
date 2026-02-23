@@ -18,16 +18,16 @@ import java.util.UUID;
 @Slf4j
 public class IndirizzoService {
     private final IndirizzoRepository indirizzoRepository;
-    private final ComuneRepository comuneRepository;
+    private final ComuneService comuneService;
 
     @Autowired
-    public IndirizzoService(IndirizzoRepository indirizzoRepository, ComuneRepository comuneRepository) {
+    public IndirizzoService(IndirizzoRepository indirizzoRepository, ComuneService comuneService) {
         this.indirizzoRepository = indirizzoRepository;
-        this.comuneRepository = comuneRepository;
+        this.comuneService = comuneService;
     }
 
     public Indirizzo saveIndirizzo(IndirizzoDTO payload){
-        Comune comune = comuneRepository.findById(payload.comuneId()).orElseThrow(() -> new RuntimeException("Comune con ID: " + payload.comuneId() + " non è stato trovato!"));
+        Comune comune = comuneService.findById(payload.comuneId());
         Indirizzo indirizzo = new Indirizzo();
         indirizzo.setVia(payload.via());
         indirizzo.setCivico(payload.civico());
