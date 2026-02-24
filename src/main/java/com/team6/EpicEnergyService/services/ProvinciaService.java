@@ -1,5 +1,6 @@
 package com.team6.EpicEnergyService.services;
 
+import com.team6.EpicEnergyService.CSV.CSVReader;
 import com.team6.EpicEnergyService.entities.Provincia;
 import com.team6.EpicEnergyService.exceptions.NotFoundException;
 import com.team6.EpicEnergyService.payloads.ProvinciaDTO;
@@ -13,14 +14,18 @@ import java.util.UUID;
 @Service
 public class ProvinciaService {
     private ProvinciaRepository provinciaRepository;
+    private CSVReader reader;
 
     @Autowired
-    public ProvinciaService(ProvinciaRepository provinciaRepository) {
+    public ProvinciaService(ProvinciaRepository provinciaRepository, CSVReader reader) {
         this.provinciaRepository = provinciaRepository;
+        this.reader = reader;
     }
 
     public Provincia save(ProvinciaDTO payload) {
-        Provincia provincia = new Provincia(payload.nome(), payload.sigla());
+
+//        reader.fileReader("provinceitaliane.csv");
+        Provincia provincia = new Provincia(payload.sigla(), payload.provincia(), payload.regione());
         this.provinciaRepository.save(provincia);
         return provincia;
     }

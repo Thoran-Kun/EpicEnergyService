@@ -23,15 +23,17 @@ public class Provincia {
     @GeneratedValue
     private UUID id_provincia;
 
-    private String nome;
-
     private String sigla;
+    private String provincia;
+    private String regione;
+
 //    @OneToMany
 //    @JoinColumn(name = "provincia_id", nullable = false)
 //    private List<Comune> listaComuni;
 
-    public Provincia(String nome, String sigla) {
-        this.nome = nome;
+    public Provincia(String sigla, String provincia, String regione) {
         this.sigla = sigla;
+        this.provincia = provincia;
+        this.regione = regione;
     }
 }
