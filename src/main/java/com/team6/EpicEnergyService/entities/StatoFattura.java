@@ -20,4 +20,8 @@ public class StatoFattura {
     @Enumerated(EnumType.STRING)
     private EnumStatoFattura stato;
 
+    public StatoFattura(EnumStatoFattura stato) {
+        this.stato = stato;
+    }
+    
 }

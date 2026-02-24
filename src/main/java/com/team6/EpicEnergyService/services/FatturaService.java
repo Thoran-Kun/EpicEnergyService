@@ -1,6 +1,7 @@
 package com.team6.EpicEnergyService.services;
 
 import com.team6.EpicEnergyService.entities.Cliente;
+import com.team6.EpicEnergyService.entities.EnumStatoFattura;
 import com.team6.EpicEnergyService.entities.Fattura;
 import com.team6.EpicEnergyService.entities.StatoFattura;
 import com.team6.EpicEnergyService.exceptions.NotFoundException;
@@ -48,4 +49,39 @@ public class FatturaService {
 
     }
 
+    // modifico la fattura (solo stato)
+    public Fattura updateStato(UUID fatturaId, EnumStatoFattura nuovoStato) {
+        // prendo la fattura tramite id
+        Fattura fattura = this.findById(fatturaId);
+
+        // prendo lo stato della fattura
+        StatoFattura stato = statoFatturaService.findByStato(nuovoStato);
+
+        // modifico lo stato
+        fattura.setStatoFattura(stato);
+
+        // la salvo
+        return fatturaRepository.save(fattura);
+    }
+
+
+    // modifico la fattura (campi importo e stato)
+    public Fattura updateFattura(UUID fatturaId, FattureDTO body, EnumStatoFattura nuovoStato) {
+        // prendo la fattura
+        Fattura fattura = this.findById(fatturaId);
+        // prendo lo stato della fattura
+        StatoFattura stato = statoFatturaService.findByStato(nuovoStato);
+        // modifico lo stato
+        fattura.setStatoFattura(stato);
+        // modifico l'importo
+        fattura.setImporto(body.importo());
+        // la salvo
+        return fatturaRepository.save(fattura);
+    }
+
+    // elimino la fattura per id
+    public void findByIdAndDelete(UUID fatturaId) {
+        Fattura fatturaDaEliminare = this.findById(fatturaId);
+        fatturaRepository.delete(fatturaDaEliminare);
+    }
 }
