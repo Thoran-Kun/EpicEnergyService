@@ -2,9 +2,12 @@ package com.team6.EpicEnergyService.CSV;
 
 
 import com.opencsv.CSVReaderBuilder;
+import com.team6.EpicEnergyService.entities.Provincia;
+import com.team6.EpicEnergyService.repositories.ProvinciaRepository;
 import com.team6.EpicEnergyService.services.ProvinciaService;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.dialect.identity.HSQLIdentityColumnSupport;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -17,19 +20,25 @@ import java.util.List;
 @Component
 public class CSVReader {
 
+    @Autowired
+    private ProvinciaRepository provinciaRepository;
 
-    public static void readAllDataAtOnce(String file) {
-        String filePath = "provinceitaliane.csv";
+    public void readAllDataAtOnce(String filePath) {
+//        String filePath = "provinceitaliane.csv";
         String line;
         String delimiter = ",";
 
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            br.readLine();
             while((line = br.readLine()) != null) {
                 String[] values = line.split(delimiter);
-                for (String value : values) {
-                    System.out.println(value + " ");
+                if(values.length >= 3){
+                    Provincia provincia = new Provincia();
+                    provincia.setSigla(values[0]);
+                    provincia.setProvincia(values[1]);
+                    provincia.setRegione(values[2]);
+                    provinciaRepository.save(provincia);
                 }
-                System.out.println();
             }
         } catch (IOException e) {
             System.err.println(e.getMessage());
