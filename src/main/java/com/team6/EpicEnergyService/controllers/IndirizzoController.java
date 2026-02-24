@@ -29,8 +29,8 @@ public class IndirizzoController {
     @PreAuthorize("hasAnyAuthority('USER', 'AMIN')")
     @ResponseStatus(HttpStatus.CREATED)
     public Indirizzo saveIndirizzo(@RequestBody @Validated IndirizzoDTO payload,
-                                   BindingResult validationResult){
-        if(validationResult.hasErrors()){
+                                   BindingResult validationResult) {
+        if (validationResult.hasErrors()) {
             List<String> errorsList = validationResult.getFieldErrors().stream()
                     .map(fieldError -> fieldError.getDefaultMessage())
                     .toList();
@@ -38,12 +38,11 @@ public class IndirizzoController {
         } else {
             return this.indirizzoService.saveIndirizzo(payload);
         }
-
     }
 
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public Page<Indirizzo> findAll(Pageable pageable){
+    public Page<Indirizzo> findAll(Pageable pageable) {
         return indirizzoService.findAll(pageable);
     }
 
