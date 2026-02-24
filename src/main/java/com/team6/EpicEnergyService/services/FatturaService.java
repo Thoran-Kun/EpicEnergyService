@@ -8,8 +8,13 @@ import com.team6.EpicEnergyService.exceptions.NotFoundException;
 import com.team6.EpicEnergyService.payloads.FattureDTO;
 import com.team6.EpicEnergyService.repositories.FatturaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -93,9 +98,38 @@ public class FatturaService {
         fatturaRepository.delete(fatturaDaEliminare);
     }
 
+    // paginazione
+    public Page<Fattura> getFatture(int page, int size, String sortBy) {
+        if (size > 100) size = 100;
+        if (size < 1) size = 1;
+        if (page < 0) page = 0;
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+        return fatturaRepository.findAll(pageable);
+    }
+
+    // prendo le fatture per cliente
+    public List<Fattura> findByCliente(UUID idCliente) {
+        return fatturaRepository.findByCliente_Id_cliente(idCliente);
+    }
+
+    // prendo le fatture per stato
+    public List<Fattura> findByStato(EnumStatoFattura stato) {
+        return fatturaRepository.findByStatoFattura_Stato(stato);
+    }
+
+    // prendo le fatture per data
+    public List<Fattura> findByData(LocalDate data) {
+        return fatturaRepository.findByData(data);
+    }
+
     // prendo le fatture per anno
     public List<Fattura> findByYear(int anno) {
         return fatturaRepository.findByYear(anno);
+    }
+
+    // prendo le fatture per range di importi
+    public List<Fattura> findByImportoBetween(double importoMin, double importoMax) {
+        return fatturaRepository.findByImportoBetween(importoMin, importoMax);
     }
 
 }
