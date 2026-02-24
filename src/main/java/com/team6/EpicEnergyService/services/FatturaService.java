@@ -10,6 +10,7 @@ import com.team6.EpicEnergyService.repositories.FatturaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -91,4 +92,10 @@ public class FatturaService {
         Fattura fatturaDaEliminare = this.findById(fatturaId);
         fatturaRepository.delete(fatturaDaEliminare);
     }
+
+    // prendo le fatture per anno
+    public List<Fattura> findByYear(int anno) {
+        return fatturaRepository.findByYear(anno);
+    }
+
 }
