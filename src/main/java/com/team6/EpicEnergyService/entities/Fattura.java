@@ -27,12 +27,6 @@ public class Fattura {
 
     // per comodità il numero della fattura sarà sequenziale
     @Column(nullable = false)
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "numero_fattura")
-    @SequenceGenerator(
-            name = "numero_fattura",
-            sequenceName = "numero_fattura_sequenza",
-            allocationSize = 1
-    )
     private int numero;
 
     @ManyToOne

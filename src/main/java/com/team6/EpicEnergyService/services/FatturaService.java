@@ -44,7 +44,14 @@ public class FatturaService {
         // recupero lo stato (enum) della fattura tramite il suo id
         StatoFattura stato = statoFatturaService.findByStato(payload.stato());
 
+        // creo la nuova fattura
         Fattura nuovaFattura = new Fattura(payload.importo(), cliente, stato);
+
+        // incremento il numero di fattura
+        int nextNumero = (int) fatturaRepository.count() + 1;
+        nuovaFattura.setNumero(nextNumero);
+
+
         return fatturaRepository.save(nuovaFattura);
 
     }
