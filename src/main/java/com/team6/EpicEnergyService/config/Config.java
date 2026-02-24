@@ -13,9 +13,8 @@ public class Config {
     @Bean
     public Cloudinary getImageUploader(@Value("${cloudinary.name}") String cloudName,
                                        @Value("${cloudinary.apikey}") String apiKey,
-                                       @Value("${cloudinary.secret}") String apiSecret){
-        // VERIFICATE SEMPRE CHE I 3 VALORI VENGANO LETTI CORRETTAMENTE TRAMITE VALUE
-        // BASTA UN SYSTEM OUT
+                                       @Value("${cloudinary.secret}") String apiSecret) {
+
         Map<String, String> configuration = new HashMap<>();
         configuration.put("cloud_name", cloudName);
         configuration.put("api_key", apiKey);
