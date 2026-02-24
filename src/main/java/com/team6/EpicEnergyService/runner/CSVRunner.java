@@ -13,6 +13,6 @@ public class CSVRunner implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        csvReader.readAllDataAtOnce("provinceitaliane.csv");
+        csvReader.readAllDataAtOnce("src/main/java/com/team6/EpicEnergyService/CSV/provinceitaliane.csv");
     }
 }
