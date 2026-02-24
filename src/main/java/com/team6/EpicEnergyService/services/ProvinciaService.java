@@ -1,6 +1,5 @@
 package com.team6.EpicEnergyService.services;
 
-import com.team6.EpicEnergyService.CSV.CSVReader;
 import com.team6.EpicEnergyService.entities.Provincia;
 import com.team6.EpicEnergyService.exceptions.NotFoundException;
 import com.team6.EpicEnergyService.repositories.ProvinciaRepository;
@@ -33,5 +32,12 @@ public class ProvinciaService {
         Optional<Provincia> optional = this.provinciaRepository.findById(uuid);
         if (optional.isPresent()) return optional.get();
         else throw new NotFoundException(uuid);
+    }
+
+    public Provincia findByProvincia(String value) {
+        Optional<Provincia> op = provinciaRepository.findByProvincia(value);
+        if (op.isPresent()) {
+            return op.get();
+        } else throw new NotFoundException(value);
     }
 }
