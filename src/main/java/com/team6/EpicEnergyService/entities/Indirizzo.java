@@ -1,7 +1,6 @@
 package com.team6.EpicEnergyService.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,14 +8,13 @@ import lombok.Setter;
 import java.util.UUID;
 
 @Entity
-@Table(name="indirizzi")
+@Table(name = "indirizzi")
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class Indirizzo {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     private String via;
@@ -27,5 +25,15 @@ public class Indirizzo {
     @OneToOne
     @JoinColumn(name = "comune_id")
     private Comune comune;
+    @ManyToOne
+    @JoinColumn(name = "cliente", nullable = false)
+    private Cliente cliente;
 
+    public Indirizzo(String via, String civico, String localita, Comune comune, int cap) {
+        this.via = via;
+        this.civico = civico;
+        this.localita = localita;
+        this.comune = comune;
+        this.cap = cap;
+    }
 }
