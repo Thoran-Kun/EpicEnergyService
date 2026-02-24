@@ -25,15 +25,16 @@ public class Fattura {
 
     private double importo;
 
+    // per comodità il numero della fattura sarà sequenziale
     @Column(nullable = false)
     private int numero;
 
     @ManyToOne
-    @JoinColumn(name = "fatture_id", nullable = false)
+    @JoinColumn(name = "cliente_id", nullable = false)
     private Cliente cliente;
 
     @ManyToOne
-    @JoinColumn(name = "stato_fatture", nullable = false)
+    @JoinColumn(name = "stato_fattura_id", nullable = false)
     private StatoFattura statoFattura;
 
     public Fattura(double importo, Cliente cliente, StatoFattura statoFattura) {

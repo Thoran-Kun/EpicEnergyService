@@ -23,6 +23,11 @@ public class Comune {
     public Comune() {
     }
 
+    public Comune(String nome, Provincia provincia) {
+        this.nome = nome;
+        this.provincia = provincia;
+    }
+
     public UUID getId() {
         return id;
     }

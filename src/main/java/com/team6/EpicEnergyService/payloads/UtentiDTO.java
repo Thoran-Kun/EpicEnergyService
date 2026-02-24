@@ -1,5 +1,6 @@
 package com.team6.EpicEnergyService.payloads;
 
+import com.team6.EpicEnergyService.entities.EnumTipoUtente;
 import com.team6.EpicEnergyService.entities.TipoUtente;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -21,6 +22,6 @@ public record UtentiDTO(
         String nome,
         String cognome,
         String avatar,
-        TipoUtente tipoUtente
+        EnumTipoUtente tipoUtente
 ) {
 }
