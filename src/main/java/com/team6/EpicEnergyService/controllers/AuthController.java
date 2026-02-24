@@ -29,7 +29,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public LoginResponseDTO loin(@RequestBody LoginDTO body){
+    public LoginResponseDTO login(@RequestBody LoginDTO body){
         return new LoginResponseDTO(this.authService.checkCredentialAndGenerateToken(body));
     }
 
