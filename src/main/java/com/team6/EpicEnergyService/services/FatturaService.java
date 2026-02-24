@@ -108,9 +108,9 @@ public class FatturaService {
     }
 
     // prendo le fatture per cliente
-    public List<Fattura> findByCliente(UUID idCliente) {
-        return fatturaRepository.findByCliente_Id_cliente(idCliente);
-    }
+    //public List<Fattura> findByCliente(UUID idCliente) {
+    //    return fatturaRepository.findByIdCliente(idCliente);
+    //}
 
     // prendo le fatture per stato
     public List<Fattura> findByStato(EnumStatoFattura stato) {
@@ -123,9 +123,9 @@ public class FatturaService {
     }
 
     // prendo le fatture per anno
-    public List<Fattura> findByYear(int anno) {
-        return fatturaRepository.findByYear(anno);
-    }
+    //public List<Fattura> findByYear(int anno) {
+    //return fatturaRepository.findByYear(anno);
+    //}
 
     // prendo le fatture per range di importi
     public List<Fattura> findByImportoBetween(double importoMin, double importoMax) {
