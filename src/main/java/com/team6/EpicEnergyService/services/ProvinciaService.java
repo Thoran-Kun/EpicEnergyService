@@ -24,8 +24,8 @@ public class ProvinciaService {
 
     public Provincia save(ProvinciaDTO payload) {
 
-        reader.fileReader("provinceitaliane.csv");
-        Provincia provincia = new Provincia(payload.nome(), payload.sigla());
+//        reader.fileReader("provinceitaliane.csv");
+        Provincia provincia = new Provincia(payload.sigla(), payload.provincia(), payload.regione());
         this.provinciaRepository.save(provincia);
         return provincia;
     }
