@@ -24,7 +24,6 @@ public class CSVReader {
     private ComuneService comuneService;
 
     public void readAllProvince(String filePath) {
-//        String filePath = "provinceitaliane.csv";
         String line;
         String delimiter = ";";
 
@@ -35,9 +34,61 @@ public class CSVReader {
                 if (values.length >= 3) {
                     Provincia provincia = new Provincia();
                     provincia.setSigla(values[0]);
-                    provincia.setProvincia(values[1]);
-                    provincia.setRegione(values[2]);
-                    provinciaService.save(provincia);
+                    if (values[1].equals("Aosta")) {
+                        values[1] = "Valle d'Aosta/Vallée d'Aoste";
+                        provincia.setProvincia(values[1]);
+                        provincia.setRegione(values[2]);
+                        provinciaService.save(provincia);
+                    } else if (values[1].equals("Monza-Brianza")) {
+                        values[1] = "Monza e della Brianza";
+                        provincia.setProvincia(values[1]);
+                        provincia.setRegione(values[2]);
+                        provinciaService.save(provincia);
+                    } else if (values[1].equals("Bolzano")) {
+                        values[1] = "Bolzano/Bozen";
+                        provincia.setProvincia(values[1]);
+                        provincia.setRegione(values[2]);
+                        provinciaService.save(provincia);
+                    } else if (values[1].equals("La-Spezia")) {
+                        values[1] = "La Spezia";
+                        provincia.setProvincia(values[1]);
+                        provincia.setRegione(values[2]);
+                        provinciaService.save(provincia);
+                    } else if (values[1].equals("Reggio-Emilia")) {
+                        values[1] = "Reggio nell'Emilia";
+                        provincia.setProvincia(values[1]);
+                        provincia.setRegione(values[2]);
+                        provinciaService.save(provincia);
+                    } else if (values[1].equals("Forli-Cesena")) {
+                        values[1] = "Forlì-Cesena";
+                        provincia.setProvincia(values[1]);
+                        provincia.setRegione(values[2]);
+                        provinciaService.save(provincia);
+                    } else if (values[1].equals("Pesaro-Urbino")) {
+                        values[1] = "Pesaro e Urbino";
+                        provincia.setProvincia(values[1]);
+                        provincia.setRegione(values[2]);
+                        provinciaService.save(provincia);
+                    } else if (values[1].equals("Ascoli-Piceno")) {
+                        values[1] = "Ascoli Piceno";
+                        provincia.setProvincia(values[1]);
+                        provincia.setRegione(values[2]);
+                        provinciaService.save(provincia);
+                    } else if (values[1].equals("Reggio-Calabria")) {
+                        values[1] = "Reggio Calabria";
+                        provincia.setProvincia(values[1]);
+                        provincia.setRegione(values[2]);
+                        provinciaService.save(provincia);
+                    } else if (values[1].equals("Vibo-Valentia")) {
+                        values[1] = "Vibo Valentia";
+                        provincia.setProvincia(values[1]);
+                        provincia.setRegione(values[2]);
+                        provinciaService.save(provincia);
+                    } else {
+                        provincia.setProvincia(values[1]);
+                        provincia.setRegione(values[2]);
+                        provinciaService.save(provincia);
+                    }
                 }
             }
             provinciaService.save(new Provincia("VB", "Verbano-Cusio-Ossola", "Piemonte"));
@@ -58,56 +109,6 @@ public class CSVReader {
                 if (values.length >= 3) {
                     Comune comune = new Comune();
                     comune.setNome(values[2]);
-                    if (values[3].equals("Valle d'Aosta/Vallée d'Aoste")) {
-                        values[3] = "Aosta";
-                        comune.setProvincia(provinciaService.findByProvincia(values[3]));
-                        comuneService.save(comune);
-                    }
-                    if (values[3].equals("Monza e della Brianza")) {
-                        values[3] = "Monza-Brianza";
-                        comune.setProvincia(provinciaService.findByProvincia(values[3]));
-                        comuneService.save(comune);
-                    }
-                    if (values[3].equals("Bolzano/Bozen")) {
-                        values[3] = "Bolzano";
-                        comune.setProvincia(provinciaService.findByProvincia(values[3]));
-                        comuneService.save(comune);
-                    }
-                    if (values[3].equals("La Spezia")) {
-                        values[3] = "La-Spezia";
-                        comune.setProvincia(provinciaService.findByProvincia(values[3]));
-                        comuneService.save(comune);
-                    }
-                    if (values[3].equals("Reggio nell'Emilia")) {
-                        values[3] = "Reggio-Emilia";
-                        comune.setProvincia(provinciaService.findByProvincia(values[3]));
-                        comuneService.save(comune);
-                    }
-                    if (values[3].equals("Forlì-Cesena")) {
-                        values[3] = "Forli-Cesena";
-                        comune.setProvincia(provinciaService.findByProvincia(values[3]));
-                        comuneService.save(comune);
-                    }
-                    if (values[3].equals("Pesaro e Urbino")) {
-                        values[3] = "Pesaro-Urbino";
-                        comune.setProvincia(provinciaService.findByProvincia(values[3]));
-                        comuneService.save(comune);
-                    }
-                    if (values[3].equals("Ascoli Piceno")) {
-                        values[3] = "Ascoli-Piceno";
-                        comune.setProvincia(provinciaService.findByProvincia(values[3]));
-                        comuneService.save(comune);
-                    }
-                    if (values[3].equals("Reggio Calabria")) {
-                        values[3] = "Reggio-Calabria";
-                        comune.setProvincia(provinciaService.findByProvincia(values[3]));
-                        comuneService.save(comune);
-                    }
-                    if (values[3].equals("Vibo Valentia")) {
-                        values[3] = "Vibo-Valentia";
-                        comune.setProvincia(provinciaService.findByProvincia(values[3]));
-                        comuneService.save(comune);
-                    }
                     Provincia provincia = provinciaService.findByProvincia(values[3]);
                     comune.setProvincia(provincia);
                     comuneService.save(comune);
