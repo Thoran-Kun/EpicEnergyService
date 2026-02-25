@@ -1,5 +1,10 @@
 package com.team6.EpicEnergyService.runner;
 
+import com.team6.EpicEnergyService.entities.EnumStatoFattura;
+import com.team6.EpicEnergyService.entities.EnumTipoUtente;
+import com.team6.EpicEnergyService.entities.StatoFattura;
+import com.team6.EpicEnergyService.entities.TipoUtente;
+import com.team6.EpicEnergyService.payloads.UtentiDTO;
 import com.team6.EpicEnergyService.services.StatoFatturaService;
 import com.team6.EpicEnergyService.services.TipoUtenteService;
 import com.team6.EpicEnergyService.services.UtenteService;
@@ -23,18 +28,18 @@ public class LoginRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         // DA RUNNARE UNA VOLTA
-        //TipoUtente admin = new TipoUtente(EnumTipoUtente.ADMIN);
-        //tipoUtenteService.save(admin);
-        //TipoUtente user = new TipoUtente(EnumTipoUtente.USER);
-        //tipoUtenteService.save(user);
+//        TipoUtente admin = new TipoUtente(EnumTipoUtente.ADMIN);
+//        tipoUtenteService.save(admin);
+//        TipoUtente user = new TipoUtente(EnumTipoUtente.USER);
+//        tipoUtenteService.save(user);
 
         // DA RUNNARE UNA VOLTA
 //        UtentiDTO admino = new UtentiDTO("admino", "admino@email.com",
 //                secret, "Adamo", "Mela", "ADMIN");
 //        utenteService.saveUtente(admino);
-        //UtentiDTO userino = new UtentiDTO("userino", "userino@email.com",
-        //secret, "Eva", "Mela", "USER");
-        //utenteService.saveUtente(userino);
+//        UtentiDTO userino = new UtentiDTO("userino", "userino@email.com",
+//        secret, "Eva", "Mela", "USER");
+//        utenteService.saveUtente(userino);
 
 //        StatoFattura pagata = new StatoFattura(EnumStatoFattura.PAGATA);
 //        statoFatturaService.createStatoFattura(pagata.getStato());
