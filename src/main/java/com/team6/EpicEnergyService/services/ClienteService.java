@@ -1,9 +1,13 @@
 package com.team6.EpicEnergyService.services;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.team6.EpicEnergyService.entities.Cliente;
 import com.team6.EpicEnergyService.exceptions.NotFoundException;
 import com.team6.EpicEnergyService.payloads.ClientiDTO;
 import com.team6.EpicEnergyService.repositories.ClienteRepository;
+import com.team6.EpicEnergyService.tools.EmailSender;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -12,16 +16,23 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
+@Slf4j
 public class ClienteService {
+    private final EmailSender mailgun;
+    private final Cloudinary cloudinary;
     private ClienteRepository clienteRepository;
 
     @Autowired
-    public ClienteService(ClienteRepository clienteRepository) {
+    public ClienteService(ClienteRepository clienteRepository, EmailSender mailgun, Cloudinary cloudinary) {
         this.clienteRepository = clienteRepository;
+        this.mailgun = mailgun;
+        this.cloudinary = cloudinary;
     }
 
     public Cliente save(ClientiDTO payload) {
@@ -33,6 +44,8 @@ public class ClienteService {
                 payload.ragioneSociale(),
                 payload.partitaIva()
         );
+
+        this.mailgun.sendRegistration(nuovoCliente);
         return clienteRepository.save(nuovoCliente);
     }
 
@@ -68,7 +81,18 @@ public class ClienteService {
     }
 
 
-    public Cliente uploadLogo(UUID id, MultipartFile file) {
-        return null;
+    public String uploadLogo(UUID clienteId, MultipartFile file) {
+        try {
+            Cliente found = this.findById(clienteId);
+            Map result = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
+            String imageUrl = (String) result.get("secure_url");
+            found.setLogoAziendale(imageUrl);
+            clienteRepository.save(found);
+
+            log.info("Logo aziendale aggiornato per il cliente: " + clienteId);
+            return imageUrl;
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

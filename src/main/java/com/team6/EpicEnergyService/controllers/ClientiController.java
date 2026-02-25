@@ -5,7 +5,6 @@ import com.team6.EpicEnergyService.entities.Utente;
 import com.team6.EpicEnergyService.exceptions.BadRequestException;
 import com.team6.EpicEnergyService.payloads.ClientiDTO;
 import com.team6.EpicEnergyService.services.ClienteService;
-import io.jsonwebtoken.io.IOException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -91,14 +90,9 @@ public class ClientiController {
         clienteService.delete(id);
     }
 
-    // UPLOAD LOGO CLIENTE
-    @PostMapping("/{id}/logo")
-    @PreAuthorize("hasAuthority('ADMIN')")
-    public Cliente uploadLogo(
-            @PathVariable UUID id,
-            @RequestParam("file") MultipartFile file
-    ) throws IOException {
-
-        return clienteService.uploadLogo(id, file);
+    @PatchMapping("/{clienteId}/avatar")
+    public String uploadLogo(@PathVariable UUID clienteId,
+                             @RequestParam("avatar")MultipartFile file){
+        return this.clienteService.uploadLogo(clienteId, file);
     }
 }
