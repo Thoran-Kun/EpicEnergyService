@@ -4,6 +4,7 @@ import com.team6.EpicEnergyService.entities.Cliente;
 import com.team6.EpicEnergyService.exceptions.NotFoundException;
 import com.team6.EpicEnergyService.payloads.ClientiDTO;
 import com.team6.EpicEnergyService.repositories.ClienteRepository;
+import com.team6.EpicEnergyService.tools.EmailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -17,11 +18,13 @@ import java.util.UUID;
 
 @Service
 public class ClienteService {
+    private final EmailSender mailgun;
     private ClienteRepository clienteRepository;
 
     @Autowired
-    public ClienteService(ClienteRepository clienteRepository) {
+    public ClienteService(ClienteRepository clienteRepository, EmailSender mailgun) {
         this.clienteRepository = clienteRepository;
+        this.mailgun = mailgun;
     }
 
     public Cliente save(ClientiDTO payload) {
@@ -33,6 +36,8 @@ public class ClienteService {
                 payload.ragioneSociale(),
                 payload.partitaIva()
         );
+
+        this.mailgun.sendRegistration(nuovoCliente);
         return clienteRepository.save(nuovoCliente);
     }
 
