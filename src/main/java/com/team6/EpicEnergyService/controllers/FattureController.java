@@ -75,11 +75,11 @@ public class FattureController {
     }
 
     // Fatture filtrate per anno
-    //@GetMapping("/anno/{anno}")
-    //@PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
-    //public List<Fattura> getByAnno(@PathVariable int anno) {
-    //return fatturaService.findByYear(anno);
-    //}
+    @GetMapping("/anno/{anno}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
+    public List<Fattura> getByAnno(@PathVariable int anno) {
+        return fatturaService.findByYear(anno);
+    }
 
     // Fatture filtrate per range di importi
     @GetMapping("/importi")
