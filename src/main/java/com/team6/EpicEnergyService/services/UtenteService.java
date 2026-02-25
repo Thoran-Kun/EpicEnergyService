@@ -1,5 +1,6 @@
 package com.team6.EpicEnergyService.services;
 
+import com.team6.EpicEnergyService.entities.EnumTipoUtente;
 import com.team6.EpicEnergyService.entities.TipoUtente;
 import com.team6.EpicEnergyService.entities.Utente;
 import com.team6.EpicEnergyService.exceptions.NotFoundException;
@@ -7,7 +8,9 @@ import com.team6.EpicEnergyService.payloads.UtentiDTO;
 import com.team6.EpicEnergyService.repositories.TipoUtenteRepository;
 import com.team6.EpicEnergyService.repositories.UtenteRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.util.UUID;
 
 @Service
@@ -15,16 +18,22 @@ public class UtenteService {
 
     private final UtenteRepo utenteRepo;
     private final TipoUtenteRepository tipoUtenteRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UtenteService(UtenteRepo utenteRepo, TipoUtenteRepository tipoUtenteRepository) {
+    public UtenteService(UtenteRepo utenteRepo, TipoUtenteRepository tipoUtenteRepository, PasswordEncoder passwordEncoder) {
         this.utenteRepo = utenteRepo;
         this.tipoUtenteRepository = tipoUtenteRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public Utente findById(UUID id) {
         return utenteRepo.findById(id)
                 .orElseThrow(() -> new NotFoundException(id));
+    }
+
+    public TipoUtente findByTipo(String tipo) {
+        return tipoUtenteRepository.findByTipo(EnumTipoUtente.valueOf(tipo)).orElseThrow(() -> new NotFoundException(tipo));
     }
 
     public Utente findByEmail(String email) {
@@ -35,22 +44,16 @@ public class UtenteService {
     public Utente saveUtente(UtentiDTO payload) {
         // TODO: aggiungere controlli su esistenza utente
 
-
-        TipoUtente tipoUtente = tipoUtenteRepository.findByTipo(payload.tipoUtente())
-                .orElseThrow(() -> new RuntimeException("Tipo utente non trovato"));
-
+        TipoUtente tipo = this.findByTipo(payload.tipo());
 
         Utente nuovoUtente = new Utente(
                 payload.username(),
                 payload.email(),
-                payload.password(),
+                passwordEncoder.encode(payload.password()),
                 payload.nome(),
-                payload.cognome()
+                payload.cognome(),
+                tipo
         );
-
-        // Imposta il TipoUtente
-        nuovoUtente.setTipoUtente(tipoUtente);
-
 
         return utenteRepo.save(nuovoUtente);
     }

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
@@ -44,12 +45,13 @@ public class Utente implements UserDetails {
     private TipoUtente tipoUtente;
 
     public Utente(String username, String email, String password,
-                  String nome, String cognome) {
+                  String nome, String cognome, TipoUtente tipoUtente) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.nome = nome;
         this.cognome = cognome;
+        this.tipoUtente = tipoUtente;
     }
 
     @Override

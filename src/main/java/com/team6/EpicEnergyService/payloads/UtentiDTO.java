@@ -1,15 +1,9 @@
 package com.team6.EpicEnergyService.payloads;
 
-import com.team6.EpicEnergyService.entities.EnumTipoUtente;
-import com.team6.EpicEnergyService.entities.TipoUtente;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
-import java.util.UUID;
-
 public record UtentiDTO(
-
-        UUID id,
 
         @NotBlank(message = "Username obbligatorio")
         String username,
@@ -21,7 +15,6 @@ public record UtentiDTO(
         String password,
         String nome,
         String cognome,
-        String avatar,
-        EnumTipoUtente tipoUtente
+        String tipo
 ) {
 }
