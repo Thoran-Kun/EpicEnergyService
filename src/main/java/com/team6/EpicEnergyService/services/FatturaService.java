@@ -108,9 +108,9 @@ public class FatturaService {
     }
 
     // prendo le fatture per cliente
-    //public List<Fattura> findByCliente(UUID idCliente) {
-    //return fatturaRepository.findByCliente_Id_cliente(idCliente);
-    //}
+    public List<Fattura> findByCliente(UUID idCliente) {
+        return fatturaRepository.findByCliente_Id(idCliente);
+    }
 
 
     // prendo le fatture per stato

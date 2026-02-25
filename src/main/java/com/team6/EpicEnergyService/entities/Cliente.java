@@ -19,7 +19,8 @@ public class Cliente {
     @Id
     @GeneratedValue
     @Getter(AccessLevel.NONE)
-    private UUID id_cliente;
+    @Column(name = "id_cliente")
+    private UUID id;
     @Enumerated(EnumType.STRING)
     private RagioneSociale ragioneSociale;
     private String partitaIva;
