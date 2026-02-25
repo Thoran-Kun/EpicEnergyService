@@ -1,4 +1,5 @@
 package com.team6.EpicEnergyService.controllers;
+
 import com.team6.EpicEnergyService.entities.Cliente;
 import com.team6.EpicEnergyService.entities.Utente;
 import com.team6.EpicEnergyService.exceptions.BadRequestException;
@@ -12,6 +13,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.UUID;
 
 @RestController
