@@ -3,7 +3,6 @@ package com.team6.EpicEnergyService.payloads;
 import com.team6.EpicEnergyService.entities.RagioneSociale;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
 
 public record ClientiDTO(String nomeContatto,
                          String cognomeContatto,
@@ -19,9 +18,9 @@ public record ClientiDTO(String nomeContatto,
                          @NotNull(message = "il CAP è obbligatorio")
                          int cap,
                          @NotNull(message = "numero di telefono obbligatorio")
-                         @Pattern(regexp = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$")
+                         //@Pattern(regexp = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$")
                          int numeroDiTelefono,
                          @NotBlank(message = "la pec è obbligatoria")
                          String pec
-                         ) {
+) {
 }
