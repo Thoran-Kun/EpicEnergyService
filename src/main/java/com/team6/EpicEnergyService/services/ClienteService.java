@@ -7,9 +7,11 @@ import com.team6.EpicEnergyService.repositories.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.Optional;
 import java.util.UUID;
 
@@ -41,6 +43,7 @@ public class ClienteService {
             return cliente.get();
         } else throw new NotFoundException((id).toString());
     }
+
     public Page<Cliente> getClienti(int page, int size, String sortBy) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
         return clienteRepository.findAll(pageable);
@@ -64,4 +67,8 @@ public class ClienteService {
         clienteRepository.delete(cliente);
     }
 
+
+    public Cliente uploadLogo(UUID id, MultipartFile file) {
+        return null;
+    }
 }
