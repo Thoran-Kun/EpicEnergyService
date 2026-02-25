@@ -13,6 +13,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
 
@@ -87,5 +88,11 @@ public class ClientiController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCliente(@PathVariable UUID id) {
         clienteService.delete(id);
+    }
+
+    @PatchMapping("/{clienteId}/avatar")
+    public String uploadLogo(@PathVariable UUID clienteId,
+                             @RequestParam("avatar")MultipartFile file){
+        return this.clienteService.uploadLogo(clienteId, file);
     }
 }
