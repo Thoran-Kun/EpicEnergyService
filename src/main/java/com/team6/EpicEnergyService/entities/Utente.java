@@ -59,7 +59,7 @@ public class Utente implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(tipoUtente.getTipo().toString()));
+        return List.of(new SimpleGrantedAuthority(tipoUtente.getTipo().name()));
     }
 }
 
