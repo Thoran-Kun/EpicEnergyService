@@ -1,6 +1,6 @@
 package com.team6.EpicEnergyService.runner;
 
-import com.team6.EpicEnergyService.payloads.UtentiDTO;
+import com.team6.EpicEnergyService.services.StatoFatturaService;
 import com.team6.EpicEnergyService.services.TipoUtenteService;
 import com.team6.EpicEnergyService.services.UtenteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,8 @@ public class LoginRunner implements CommandLineRunner {
     private UtenteService utenteService;
     @Autowired
     private TipoUtenteService tipoUtenteService;
+    @Autowired
+    private StatoFatturaService statoFatturaService;
     @Value("${PASS}")
     private String secret;
 
@@ -30,6 +32,16 @@ public class LoginRunner implements CommandLineRunner {
 //        UtentiDTO admino = new UtentiDTO("admino", "admino@email.com",
 //                secret, "Adamo", "Mela", "ADMIN");
 //        utenteService.saveUtente(admino);
+        //UtentiDTO userino = new UtentiDTO("userino", "userino@email.com",
+        //secret, "Eva", "Mela", "USER");
+        //utenteService.saveUtente(userino);
+
+//        StatoFattura pagata = new StatoFattura(EnumStatoFattura.PAGATA);
+//        statoFatturaService.createStatoFattura(pagata.getStato());
+//        StatoFattura annullata = new StatoFattura(EnumStatoFattura.ANNULLATA);
+//        statoFatturaService.createStatoFattura(annullata.getStato());
+//        StatoFattura inCarico = new StatoFattura(EnumStatoFattura.IN_CARICO);
+//        statoFatturaService.createStatoFattura(inCarico.getStato());
     }
 
 }
