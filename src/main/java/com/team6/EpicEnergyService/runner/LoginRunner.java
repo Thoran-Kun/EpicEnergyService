@@ -1,6 +1,5 @@
 package com.team6.EpicEnergyService.runner;
 
-import com.team6.EpicEnergyService.payloads.UtentiDTO;
 import com.team6.EpicEnergyService.services.TipoUtenteService;
 import com.team6.EpicEnergyService.services.UtenteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +26,9 @@ public class LoginRunner implements CommandLineRunner {
         //tipoUtenteService.save(user);
 
         // DA RUNNARE UNA VOLTA
-        UtentiDTO admino = new UtentiDTO("admino", "admino@email.com",
-                secret, "Adamo", "Mela", "ADMIN");
-        utenteService.saveUtente(admino);
+        //UtentiDTO admino = new UtentiDTO("admino", "admino@email.com",
+        // secret, "Adamo", "Mela", "ADMIN");
+        // utenteService.saveUtente(admino);
     }
 
 }
