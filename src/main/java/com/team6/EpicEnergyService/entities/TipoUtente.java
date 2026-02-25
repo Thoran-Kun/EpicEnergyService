@@ -1,7 +1,10 @@
 package com.team6.EpicEnergyService.entities;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.util.UUID;
 
@@ -10,7 +13,6 @@ import java.util.UUID;
 @ToString
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "tipo_utenti")
 public class TipoUtente {
     @Id
@@ -19,4 +21,8 @@ public class TipoUtente {
 
     @Enumerated(EnumType.STRING)
     private EnumTipoUtente tipo;
+
+    public TipoUtente(EnumTipoUtente tipo) {
+        this.tipo = tipo;
     }
+}
