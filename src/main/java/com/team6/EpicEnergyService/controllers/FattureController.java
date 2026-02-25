@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/fatture")
@@ -50,11 +51,12 @@ public class FattureController {
 
     // GET DELLE FATTURE CON FILTRI
     // Fatture filtrate per cliente
-    //@GetMapping("/cliente/{clienteId}")
-    //@PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
-    //public List<Fattura> getByCliente(@PathVariable UUID clienteId) {
-    //return fatturaService.findByCliente(clienteId);
-    //}
+    @GetMapping("/cliente/{clienteId}")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
+    public List<Fattura> getByCliente(@PathVariable UUID clienteId) {
+        return fatturaService.findByCliente(clienteId);
+    }
+
 
     // Fatture filtrate per stato
     @GetMapping("/stato/{stato}")
