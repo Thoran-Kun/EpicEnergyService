@@ -3,6 +3,8 @@ package com.team6.EpicEnergyService.repositories;
 import com.team6.EpicEnergyService.entities.EnumStatoFattura;
 import com.team6.EpicEnergyService.entities.Fattura;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -15,6 +17,8 @@ public interface FatturaRepository extends JpaRepository<Fattura, UUID> {
     //@Query("SELECT f FROM fatture f WHERE f.id_cliente = :id")
     //List<Fattura> findByIdCliente(@Param("id") UUID id);
     //List<Fattura> findByIdCliente(Cliente cliente);
+    //@Query("SELECT f FROM fatture f WHERE cliente_id = :id")
+    //List<Fattura> findByIdCliente(@Param("id") UUID id);
 
     // Filtro le fatture per stato
     List<Fattura> findByStatoFattura_Stato(EnumStatoFattura stato);
@@ -23,6 +27,8 @@ public interface FatturaRepository extends JpaRepository<Fattura, UUID> {
     List<Fattura> findByData(LocalDate data);
 
     // Filtro le fatture per anno con JPQL
+    //@Query("SELECT f FROM fatture f WHERE YEAR(f.data) = :anno")
+    //List<Fattura> findByYear(@Param("anno") int anno);
     //@Query("SELECT f FROM Fattura f WHERE YEAR(f.data) = :anno")
     //List<Fattura> findByYear(@Param("anno") int anno);
 
