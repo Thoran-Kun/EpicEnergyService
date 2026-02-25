@@ -21,12 +21,17 @@ public class EmailSender {
 
     public void sendRegistration(Cliente recipient){
         HttpResponse<JsonNode> response = Unirest.post("https://api.mailgun.net/v3/" + this.domain + "/messages").basicAuth("api", apiKey)
-                .queryString("from", "nehaya7011@ostahie.com")
+                .queryString("from", "pepesalvatore12@gmail.com")
                 .queryString("to", recipient.getEmail())
                 .queryString("subject", "Benvenuto in EpicEnergyService")
                 .queryString("text", "Ciao" + recipient.getNomeContatto() + ", la tua registrazione è andata a buon fine :)")
                 .asJson();
-        System.out.println(response.getBody()); // log per ispezionare la risposta e poter debuggare più facilmente
+
+        if(response.getStatus() == 200) {
+            System.out.println("Email inviata con successo");// log per ispezionare la risposta e poter debuggare più facilmente
+        } else {
+            System.out.println("Errore in Mailgun: " + response.getBody());
+        }
     }
 
     public void sendBilingEmail(Cliente recipient){}
