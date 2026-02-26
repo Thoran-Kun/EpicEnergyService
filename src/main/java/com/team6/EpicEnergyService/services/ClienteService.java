@@ -118,7 +118,7 @@ public class ClienteService {
 
     // ORDINAMENTO DEI CLIENTI
     public List<Cliente> orderByCognome() {
-        return clienteRepository.findAllByOrderByNomeContattoAsc();
+        return clienteRepository.findAllByOrderByCognomeContattoAsc();
     }
 
     public List<Cliente> orderByFatturato() {

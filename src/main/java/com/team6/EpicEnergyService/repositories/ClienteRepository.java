@@ -32,8 +32,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, UUID> {
 
     // Ordinamento clienti
 
-    // Ordina i clienti per nome
-    List<Cliente> findAllByOrderByNomeContattoAsc();
+    // Ordina i clienti per cognome
+    List<Cliente> findAllByOrderByCognomeContattoAsc();
 
     // Ordina i clienti per fatturato annuale
     List<Cliente> findAllByOrderByFatturatoAnnualeAsc();

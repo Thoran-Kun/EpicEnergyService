@@ -98,7 +98,7 @@ public class ClientiController {
     // ORDINAMENTI
 
     @GetMapping("/order/cognome")
-    public List<Cliente> ordinaPerCognomeParziale() {
+    public List<Cliente> ordinaPerCognomeAsc() {
         return clienteService.orderByCognome();
     }
 
@@ -144,11 +144,10 @@ public class ClientiController {
     }
 
 
-
     @PatchMapping("/{clienteId}/avatar")
     @PreAuthorize("hasAuthority('ADMIN')")
     public String uploadLogo(@PathVariable UUID clienteId,
-                             @RequestParam("avatar") MultipartFile file){
+                             @RequestParam("avatar") MultipartFile file) {
         return this.clienteService.uploadLogo(clienteId, file);
     }
 }
