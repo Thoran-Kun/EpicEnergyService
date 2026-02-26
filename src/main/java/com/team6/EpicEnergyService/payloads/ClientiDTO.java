@@ -17,6 +17,8 @@ public record ClientiDTO(String nomeContatto,
                          String localita,
                          @NotNull(message = "il CAP è obbligatorio")
                          int cap,
+                         @NotNull
+                         String citta,
                          @NotNull(message = "numero di telefono obbligatorio")
                          //@Pattern(regexp = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$")
                          int numeroDiTelefono,

@@ -11,6 +11,8 @@ public record IndirizzoDTO(
         @NotBlank(message = "la località è obbligatoria")
         String localita,
         @NotNull(message = "il CAP è obbligatorio")
-        int cap
+        int cap,
+        @NotBlank
+        String citta
 ) {
 }

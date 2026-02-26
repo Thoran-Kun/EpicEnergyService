@@ -20,8 +20,12 @@ import java.util.UUID;
 @RequestMapping("/clienti")
 public class ClientiController {
 
+    private final ClienteService clienteService;
+
     @Autowired
-    private ClienteService clienteService;
+    public ClientiController(ClienteService clienteService) {
+        this.clienteService = clienteService;
+    }
 
 
     // CREATE CLIENTE

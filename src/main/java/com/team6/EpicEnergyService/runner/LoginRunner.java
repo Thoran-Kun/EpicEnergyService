@@ -1,5 +1,7 @@
 package com.team6.EpicEnergyService.runner;
 
+import com.team6.EpicEnergyService.entities.EnumTipoUtente;
+import com.team6.EpicEnergyService.entities.TipoUtente;
 import com.team6.EpicEnergyService.services.StatoFatturaService;
 import com.team6.EpicEnergyService.services.TipoUtenteService;
 import com.team6.EpicEnergyService.services.UtenteService;
@@ -23,10 +25,10 @@ public class LoginRunner implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         // DA RUNNARE UNA VOLTA
-        //TipoUtente admin = new TipoUtente(EnumTipoUtente.ADMIN);
-        //tipoUtenteService.save(admin);
-        //TipoUtente user = new TipoUtente(EnumTipoUtente.USER);
-        //tipoUtenteService.save(user);
+        TipoUtente admin = new TipoUtente(EnumTipoUtente.ADMIN);
+        tipoUtenteService.save(admin);
+        TipoUtente user = new TipoUtente(EnumTipoUtente.USER);
+        tipoUtenteService.save(user);
 
         // DA RUNNARE UNA VOLTA
 //        UtentiDTO admino = new UtentiDTO("admino", "admino@email.com",

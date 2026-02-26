@@ -40,11 +40,13 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente")
     private List<Fattura> listaFatture;
 
-    public Cliente(String nomeContatto, String cognomeContatto, String emailContatto, RagioneSociale ragioneSociale, String partitaIva) {
+
+    public Cliente(String nomeContatto, String cognomeContatto, String emailContatto, RagioneSociale ragioneSociale, String partitaIva, Indirizzo indirizzo) {
         this.nomeContatto = nomeContatto;
         this.cognomeContatto = cognomeContatto;
         this.emailContatto = emailContatto;
         this.ragioneSociale = ragioneSociale;
         this.partitaIva = partitaIva;
+        this.listaIndirizzi.add(indirizzo);
     }
 }
