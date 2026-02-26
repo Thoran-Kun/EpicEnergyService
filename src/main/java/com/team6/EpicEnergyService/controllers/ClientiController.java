@@ -14,6 +14,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -88,4 +90,55 @@ public class ClientiController {
     public void deleteCliente(@PathVariable UUID id) {
         clienteService.delete(id);
     }
+
+
+    // ORDINAMENTI
+
+    @GetMapping("/order/cognome")
+    public List<Cliente> ordinaPerCognomeParziale() {
+        return clienteService.orderByCognome();
+    }
+
+    @GetMapping("/order/fatturato")
+    public List<Cliente> ordinaPerFatturato() {
+        return clienteService.orderByFatturato();
+    }
+
+    @GetMapping("/order/data-inserimento")
+    public List<Cliente> ordinaPerDataInserimento() {
+        return clienteService.orderByDataInserimento();
+    }
+
+    @GetMapping("/order/ultimo-contatto")
+    public List<Cliente> ordinaPerUltimoContatto() {
+        return clienteService.orderByUltimoContatto();
+    }
+
+    // FILTRI
+
+    // Filtro i clienti per fatturato
+    @GetMapping("/filter/fatturato")
+    public List<Cliente> filtraPerFatturato(@RequestParam double fatturato) {
+        return clienteService.filterByFatturato(fatturato);
+    }
+
+    // Filtro i clienti per la data di inserimento
+    @GetMapping("/filter/data-inserimento")
+    public List<Cliente> filtraPerDataInserimento(@RequestParam LocalDate data) {
+        return clienteService.filterByData(data);
+    }
+
+    // Filtro i clienti per la data dell'ultimo contatto
+    @GetMapping("/filter/ultimo-contatto")
+    public List<Cliente> filtraPerUltimoContatto(@RequestParam LocalDate data) {
+        return clienteService.filterByContatto(data);
+    }
+
+    // Filtro i clienti per cognome parziale
+    @GetMapping("/filter/cognome")
+    public List<Cliente> filtraPerCognome(@RequestParam String cognome) {
+        return clienteService.filterByCognome(cognome);
+    }
+
+
 }
