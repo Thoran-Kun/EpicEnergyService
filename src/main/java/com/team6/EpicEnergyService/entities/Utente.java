@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
@@ -28,11 +29,8 @@ public class Utente implements UserDetails {
 
     @Column(nullable = false, unique = true)
     private String username;
-
-    @Getter(AccessLevel.NONE)
     @Column(nullable = false, unique = true)
     private String email;
-
     @Column(nullable = false)
     private String password;
 
@@ -43,6 +41,7 @@ public class Utente implements UserDetails {
     @ManyToOne
     @JoinColumn(name = "tipo_utenti", nullable = false)
     private TipoUtente tipoUtente;
+    private String ruolo;
 
     public Utente(String username, String email, String password,
                   String nome, String cognome, TipoUtente tipoUtente) {
@@ -52,11 +51,12 @@ public class Utente implements UserDetails {
         this.nome = nome;
         this.cognome = cognome;
         this.tipoUtente = tipoUtente;
+        this.ruolo = tipoUtente.getTipo().toString();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        return List.of(new SimpleGrantedAuthority(tipoUtente.getTipo().name()));
     }
 }
 

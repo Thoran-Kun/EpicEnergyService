@@ -1,4 +1,5 @@
 package com.team6.EpicEnergyService.controllers;
+
 import com.team6.EpicEnergyService.entities.Cliente;
 import com.team6.EpicEnergyService.entities.Utente;
 import com.team6.EpicEnergyService.exceptions.BadRequestException;
@@ -12,14 +13,20 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/clienti")
 public class ClientiController {
 
+    private final ClienteService clienteService;
+
     @Autowired
-    private ClienteService clienteService;
+    public ClientiController(ClienteService clienteService) {
+        this.clienteService = clienteService;
+    }
 
 
     // CREATE CLIENTE
@@ -32,11 +39,9 @@ public class ClientiController {
             BindingResult validation,
             @AuthenticationPrincipal Utente utente
     ) {
-
         if (validation.hasErrors()) {
             throw new BadRequestException(validation.getAllErrors());
         }
-
         return clienteService.save(body);
     }
 
@@ -56,7 +61,7 @@ public class ClientiController {
     public Page<Cliente> getClienti(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "id_cliente") String sortBy
+            @RequestParam(defaultValue = "id") String sortBy
     ) {
         return clienteService.getClienti(page, size, sortBy);
     }
@@ -85,5 +90,12 @@ public class ClientiController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCliente(@PathVariable UUID id) {
         clienteService.delete(id);
+    }
+
+    @PatchMapping("/{clienteId}/avatar")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String uploadLogo(@PathVariable UUID clienteId,
+                             @RequestParam("avatar") MultipartFile file){
+        return this.clienteService.uploadLogo(clienteId, file);
     }
 }
