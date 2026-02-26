@@ -3,6 +3,7 @@ package com.team6.EpicEnergyService.services;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.team6.EpicEnergyService.entities.Cliente;
+import com.team6.EpicEnergyService.entities.Fattura;
 import com.team6.EpicEnergyService.entities.Indirizzo;
 import com.team6.EpicEnergyService.exceptions.NotFoundException;
 import com.team6.EpicEnergyService.payloads.ClientiDTO;
@@ -111,5 +112,12 @@ public class ClienteService {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void updateFatture(Cliente cliente, Fattura fattura) {
+        cliente.getListaFatture().add(fattura);
+        cliente.setFatturatoAnnuale(cliente.getListaFatture().stream().mapToDouble(Fattura::getImporto).sum());
+        cliente.setDataUltimoContatto(cliente.getListaFatture().getLast().getData());
+        clienteRepository.save(cliente);
     }
 }
