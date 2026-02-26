@@ -45,6 +45,7 @@ public class ClienteService {
                 payload.partitaIva()
         );
 
+        nuovoCliente.setEmail(payload.emailContatto());
         this.mailgun.sendRegistration(nuovoCliente);
         return clienteRepository.save(nuovoCliente);
     }
@@ -81,15 +82,15 @@ public class ClienteService {
     }
 
 
-    public String uploadLogo(UUID clienteId, MultipartFile file) {
+    public String uploadLogo(UUID id, MultipartFile file) {
         try {
-            Cliente found = this.findById(clienteId);
+            Cliente found = this.findById(id);
             Map result = cloudinary.uploader().upload(file.getBytes(), ObjectUtils.emptyMap());
             String imageUrl = (String) result.get("secure_url");
             found.setLogoAziendale(imageUrl);
             clienteRepository.save(found);
 
-            log.info("Logo aziendale aggiornato per il cliente: " + clienteId);
+            log.info("Logo aziendale aggiornato per il cliente: " + id);
             return imageUrl;
         } catch (IOException e) {
             throw new RuntimeException(e);

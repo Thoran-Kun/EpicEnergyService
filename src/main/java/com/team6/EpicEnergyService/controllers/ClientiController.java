@@ -59,7 +59,7 @@ public class ClientiController {
     public Page<Cliente> getClienti(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "id_cliente") String sortBy
+            @RequestParam(defaultValue = "id") String sortBy
     ) {
         return clienteService.getClienti(page, size, sortBy);
     }
