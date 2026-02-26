@@ -29,11 +29,8 @@ public class Utente implements UserDetails {
 
     @Column(nullable = false, unique = true)
     private String username;
-
-    @Getter(AccessLevel.NONE)
     @Column(nullable = false, unique = true)
     private String email;
-
     @Column(nullable = false)
     private String password;
 

@@ -32,6 +32,7 @@ public class IndirizzoService {
         indirizzo.setCap(payload.cap());
         indirizzo.setLocalita(payload.localita());
         indirizzo.setComune(comuneService.findByNome(payload.citta()));
+        indirizzo.setTipoSede(payload.tipoSede());
 
         Indirizzo savedIndirizzo = indirizzoRepository.save(indirizzo);
         log.info("Nuovo indirizzo salvato con successo: " + savedIndirizzo.getId());

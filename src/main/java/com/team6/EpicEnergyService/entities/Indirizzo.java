@@ -16,25 +16,22 @@ public class Indirizzo {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
-
     private String via;
     private String civico;
     private String localita;
     private int cap;
+    private TipoSede tipoSede;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "comune_id")
     private Comune comune;
 
-    @ManyToOne
-    @JoinColumn(name = "cliente", nullable = false)
-    private Cliente cliente;
-
-    public Indirizzo(String via, String civico, String localita, Comune comune, int cap) {
+    public Indirizzo(String via, String civico, String localita, Comune comune, int cap, TipoSede tipoSede) {
         this.via = via;
         this.civico = civico;
         this.localita = localita;
         this.comune = comune;
         this.cap = cap;
+        this.tipoSede = tipoSede;
     }
 }

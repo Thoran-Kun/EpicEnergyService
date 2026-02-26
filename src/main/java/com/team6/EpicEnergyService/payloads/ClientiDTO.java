@@ -1,12 +1,17 @@
 package com.team6.EpicEnergyService.payloads;
 
 import com.team6.EpicEnergyService.entities.RagioneSociale;
+import com.team6.EpicEnergyService.entities.TipoSede;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 public record ClientiDTO(String nomeContatto,
                          String cognomeContatto,
                          String emailContatto,
+                         @NotNull(message = "numero di telefono obbligatorio")
+                         @Pattern(regexp = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$")
+                         String telefono,
                          RagioneSociale ragioneSociale,
                          String partitaIva,
                          @NotBlank(message = "la via è obbligatoria")
@@ -19,10 +24,7 @@ public record ClientiDTO(String nomeContatto,
                          int cap,
                          @NotNull
                          String citta,
-                         @NotNull(message = "numero di telefono obbligatorio")
-                         //@Pattern(regexp = "^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$")
-                         int numeroDiTelefono,
-                         @NotBlank(message = "la pec è obbligatoria")
-                         String pec
+                         @NotNull
+                         TipoSede tipoSede
 ) {
 }

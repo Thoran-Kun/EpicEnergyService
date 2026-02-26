@@ -1,5 +1,6 @@
 package com.team6.EpicEnergyService.payloads;
 
+import com.team6.EpicEnergyService.entities.TipoSede;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
@@ -13,6 +14,8 @@ public record IndirizzoDTO(
         @NotNull(message = "il CAP è obbligatorio")
         int cap,
         @NotBlank
-        String citta
+        String citta,
+        @NotNull
+        TipoSede tipoSede
 ) {
 }

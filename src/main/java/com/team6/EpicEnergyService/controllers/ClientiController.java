@@ -38,11 +38,9 @@ public class ClientiController {
             BindingResult validation,
             @AuthenticationPrincipal Utente utente
     ) {
-
         if (validation.hasErrors()) {
             throw new BadRequestException(validation.getAllErrors());
         }
-
         return clienteService.save(body);
     }
 
