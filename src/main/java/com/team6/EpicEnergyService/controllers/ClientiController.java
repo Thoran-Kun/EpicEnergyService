@@ -59,7 +59,7 @@ public class ClientiController {
     public Page<Cliente> getClienti(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "id_cliente") String sortBy
+            @RequestParam(defaultValue = "id") String sortBy
     ) {
         return clienteService.getClienti(page, size, sortBy);
     }
@@ -91,8 +91,9 @@ public class ClientiController {
     }
 
     @PatchMapping("/{clienteId}/avatar")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String uploadLogo(@PathVariable UUID clienteId,
-                             @RequestParam("avatar")MultipartFile file){
+                             @RequestParam("avatar") MultipartFile file){
         return this.clienteService.uploadLogo(clienteId, file);
     }
 }
