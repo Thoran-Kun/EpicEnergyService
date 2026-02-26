@@ -12,29 +12,34 @@ public class EmailSender {
 
     private String domain;
     private String apiKey;
+    private String emailFrom;
 
     public EmailSender(@Value("${mailgun.domain}") String domain,
-                       @Value("${mailgun.apiKey}") String apiKey) {
+                       @Value("${mailgun.apiKey}") String apiKey,
+                       @Value("${email.from}") String emailFrom) {
         this.domain = domain;
         this.apiKey = apiKey;
+        this.emailFrom = emailFrom;
     }
 
-    public void sendRegistration(Cliente recipient){
+    public void sendRegistration(Cliente recipient) {
         HttpResponse<JsonNode> response = Unirest.post("https://api.mailgun.net/v3/" + this.domain + "/messages").basicAuth("api", apiKey)
-                .queryString("from", "pepesalvatore12@gmail.com")
+                .queryString("from", emailFrom)
                 .queryString("to", recipient.getEmailContatto())
                 .queryString("subject", "Benvenuto in EpicEnergyService")
                 .queryString("text", "Ciao " + recipient.getNomeContatto() + ",la tua registrazione è andata a buon fine :)")
                 .asJson();
 
-        if(response.getStatus() == 200) {
+        if (response.getStatus() == 200) {
             System.out.println("Email inviata con successo");// log per ispezionare la risposta e poter debuggare più facilmente
         } else {
             System.out.println("Errore in Mailgun: " + response.getBody());
         }
     }
 
-    public void sendBilingEmail(Cliente recipient){}
+    public void sendBilingEmail(Cliente recipient) {
+    }
 
-    public void sendInvoiceEmail(Cliente recipient){}
+    public void sendInvoiceEmail(Cliente recipient) {
+    }
 }
