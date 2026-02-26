@@ -14,12 +14,11 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
-import java.util.List;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -29,7 +28,7 @@ import java.util.UUID;
 public class ClienteService {
     private final EmailSender mailgun;
     private final Cloudinary cloudinary;
-    private ClienteRepository clienteRepository;
+
 
     @Autowired
     private ClienteRepository clienteRepository;
@@ -102,6 +101,7 @@ public class ClienteService {
             throw new RuntimeException(e);
         }
     }
+
     // ORDINAMENTO DEI CLIENTI
     public List<Cliente> orderByCognome() {
         return clienteRepository.findAllByOrderByNomeContattoAsc();
