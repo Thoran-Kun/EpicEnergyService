@@ -2,23 +2,17 @@ package com.team6.EpicEnergyService.services;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
-import com.cloudinary.Cloudinary;
 import com.team6.EpicEnergyService.entities.Cliente;
-import com.team6.EpicEnergyService.entities.Indirizzo;
 import com.team6.EpicEnergyService.entities.Indirizzo;
 import com.team6.EpicEnergyService.exceptions.NotFoundException;
 import com.team6.EpicEnergyService.payloads.ClientiDTO;
 import com.team6.EpicEnergyService.payloads.IndirizzoDTO;
-import com.team6.EpicEnergyService.payloads.IndirizzoDTO;
 import com.team6.EpicEnergyService.repositories.ClienteRepository;
-import com.team6.EpicEnergyService.tools.EmailSender;
-import lombok.extern.slf4j.Slf4j;
 import com.team6.EpicEnergyService.tools.EmailSender;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
@@ -38,8 +32,8 @@ public class ClienteService {
     private IndirizzoService indirizzoService;
 
     @Autowired
-    public ClienteService(ClienteRepository clienteRepository, EmailSender mailgun, Cloudinary cloudinary) {
-    public ClienteService(ClienteRepository clienteRepository, IndirizzoService indirizzoService) {
+    public ClienteService(ClienteRepository clienteRepository, EmailSender mailgun, Cloudinary cloudinary, IndirizzoService indirizzoService) {
+
         this.clienteRepository = clienteRepository;
         this.mailgun = mailgun;
         this.cloudinary = cloudinary;
@@ -60,7 +54,6 @@ public class ClienteService {
 
         nuovoCliente.setEmail(payload.emailContatto());
         this.mailgun.sendRegistration(nuovoCliente);
-        return clienteRepository.save(nuovoCliente);
         clienteRepository.save(nuovoCliente);
         System.out.println(nuovoCliente.getListaIndirizzi().size());
         this.findByPartitaIva(payload.partitaIva()).getListaIndirizzi().add(indirizzo1);
