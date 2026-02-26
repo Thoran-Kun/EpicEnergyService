@@ -104,14 +104,9 @@
 
         <dependency>
             <groupId>com.konghq</groupId>
-            <artifactId>unirest-java</artifactId>
-            <version>3.14.5</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.konghq</groupId>
-            <artifactId>unirest-modules-jackson-legacy</artifactId>
-            <version>4.7.4</version>
+            <artifactId>unirest-objectmapper-jackson</artifactId>
+            <version>4.2.9</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>

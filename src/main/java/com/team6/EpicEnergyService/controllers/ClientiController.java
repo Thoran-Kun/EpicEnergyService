@@ -91,8 +91,9 @@ public class ClientiController {
     }
 
     @PatchMapping("/{clienteId}/avatar")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public String uploadLogo(@PathVariable UUID clienteId,
-                             @RequestParam("avatar")MultipartFile file){
+                             @RequestParam("avatar") MultipartFile file){
         return this.clienteService.uploadLogo(clienteId, file);
     }
 }

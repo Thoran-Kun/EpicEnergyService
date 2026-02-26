@@ -8,8 +8,13 @@ import com.team6.EpicEnergyService.payloads.UtentiDTO;
 import com.team6.EpicEnergyService.repositories.TipoUtenteRepository;
 import com.team6.EpicEnergyService.repositories.UtenteRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
 
@@ -57,4 +62,6 @@ public class UtenteService {
 
         return utenteRepo.save(nuovoUtente);
     }
+
+
 }
