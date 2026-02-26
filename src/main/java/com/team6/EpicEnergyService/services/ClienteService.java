@@ -3,8 +3,10 @@ package com.team6.EpicEnergyService.services;
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import com.team6.EpicEnergyService.entities.Cliente;
+import com.team6.EpicEnergyService.entities.Indirizzo;
 import com.team6.EpicEnergyService.exceptions.NotFoundException;
 import com.team6.EpicEnergyService.payloads.ClientiDTO;
+import com.team6.EpicEnergyService.payloads.IndirizzoDTO;
 import com.team6.EpicEnergyService.repositories.ClienteRepository;
 import com.team6.EpicEnergyService.tools.EmailSender;
 import lombok.extern.slf4j.Slf4j;
@@ -28,31 +30,37 @@ import java.util.UUID;
 public class ClienteService {
     private final EmailSender mailgun;
     private final Cloudinary cloudinary;
+    private ClienteRepository clienteRepository;
+    private IndirizzoService indirizzoService;
 
 
     @Autowired
-    private ClienteRepository clienteRepository;
+    public ClienteService(ClienteRepository clienteRepository, EmailSender mailgun, Cloudinary cloudinary, IndirizzoService indirizzoService) {
 
-
-    public ClienteService(ClienteRepository clienteRepository, EmailSender mailgun, Cloudinary cloudinary) {
         this.clienteRepository = clienteRepository;
         this.mailgun = mailgun;
         this.cloudinary = cloudinary;
+        this.indirizzoService = indirizzoService;
     }
 
     public Cliente save(ClientiDTO payload) {
-
+        IndirizzoDTO indirizzo = new IndirizzoDTO(payload.via(), payload.civico(), payload.localita(), payload.cap(), payload.citta(), payload.tipoSede());
+        Indirizzo indirizzo1 = this.indirizzoService.saveIndirizzo(indirizzo);
         Cliente nuovoCliente = new Cliente(
                 payload.nomeContatto(),
                 payload.cognomeContatto(),
                 payload.emailContatto(),
+                payload.telefono(),
                 payload.ragioneSociale(),
                 payload.partitaIva()
         );
 
         nuovoCliente.setEmail(payload.emailContatto());
         this.mailgun.sendRegistration(nuovoCliente);
-        return clienteRepository.save(nuovoCliente);
+        clienteRepository.save(nuovoCliente);
+        System.out.println(nuovoCliente.getListaIndirizzi().size());
+        this.findByPartitaIva(payload.partitaIva()).getListaIndirizzi().add(indirizzo1);
+        return nuovoCliente;
     }
 
     // cerco il cliente per id
@@ -86,6 +94,12 @@ public class ClienteService {
         clienteRepository.delete(cliente);
     }
 
+    public Cliente findByPartitaIva(String partitaIva) {
+        Optional<Cliente> optional = this.clienteRepository.findByPartitaIva(partitaIva);
+        if (optional.isPresent()) {
+            return optional.get();
+        } else throw new NotFoundException("Il cliente non è stato trovato");
+    }
 
     public String uploadLogo(UUID id, MultipartFile file) {
         try {

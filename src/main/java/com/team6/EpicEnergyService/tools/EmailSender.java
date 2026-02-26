@@ -16,8 +16,7 @@ public class EmailSender {
 
     public EmailSender(@Value("${mailgun.domain}") String domain,
                        @Value("${mailgun.apiKey}") String apiKey,
-                       @Value("${email.from}") String emailFrom
-    ) {
+                       @Value("${email.from}") String emailFrom) {
         this.domain = domain;
         this.apiKey = apiKey;
         this.emailFrom = emailFrom;

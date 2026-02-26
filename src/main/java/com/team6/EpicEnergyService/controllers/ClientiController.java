@@ -23,8 +23,12 @@ import java.util.UUID;
 @RequestMapping("/clienti")
 public class ClientiController {
 
+    private final ClienteService clienteService;
+
     @Autowired
-    private ClienteService clienteService;
+    public ClientiController(ClienteService clienteService) {
+        this.clienteService = clienteService;
+    }
 
 
     // CREATE CLIENTE
@@ -37,11 +41,9 @@ public class ClientiController {
             BindingResult validation,
             @AuthenticationPrincipal Utente utente
     ) {
-
         if (validation.hasErrors()) {
             throw new BadRequestException(validation.getAllErrors());
         }
-
         return clienteService.save(body);
     }
 
