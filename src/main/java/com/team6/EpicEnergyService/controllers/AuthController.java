@@ -29,14 +29,14 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public LoginResponseDTO login(@RequestBody LoginDTO body){
+    public LoginResponseDTO login(@RequestBody LoginDTO body) {
         return new LoginResponseDTO(this.authService.checkCredentialAndGenerateToken(body));
     }
 
     @PostMapping("/register")
     @ResponseStatus(HttpStatus.CREATED)
-    public Utente createUtente(@RequestBody @Validated UtentiDTO payload, BindingResult validationResult){
-        if(validationResult.hasErrors()){
+    public Utente createUtente(@RequestBody @Validated UtentiDTO payload, BindingResult validationResult) {
+        if (validationResult.hasErrors()) {
             List<String> errorList = validationResult.getFieldErrors()
                     .stream()
                     .map(fieldError -> fieldError.getDefaultMessage())
@@ -47,4 +47,6 @@ public class AuthController {
             return this.utenteService.saveUtente(payload);
         }
     }
+
+
 }

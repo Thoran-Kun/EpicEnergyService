@@ -13,6 +13,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
 
@@ -60,7 +61,7 @@ public class ClientiController {
     public Page<Cliente> getClienti(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size,
-            @RequestParam(defaultValue = "id_cliente") String sortBy
+            @RequestParam(defaultValue = "id") String sortBy
     ) {
         return clienteService.getClienti(page, size, sortBy);
     }
@@ -89,5 +90,12 @@ public class ClientiController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCliente(@PathVariable UUID id) {
         clienteService.delete(id);
+    }
+
+    @PatchMapping("/{clienteId}/avatar")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public String uploadLogo(@PathVariable UUID clienteId,
+                             @RequestParam("avatar") MultipartFile file){
+        return this.clienteService.uploadLogo(clienteId, file);
     }
 }
