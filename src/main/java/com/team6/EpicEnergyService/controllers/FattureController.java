@@ -91,5 +91,20 @@ public class FattureController {
         return fatturaService.findByImportoBetween(importoMin, importoMax);
     }
 
+    // MODIFICA FATTURE
+    @PutMapping("/{idFatture}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public Fattura updateFattura(
+            @PathVariable UUID idFatture,
+            @RequestBody @Validated FattureDTO body,
+            BindingResult validation
+    ) {
+        if (validation.hasErrors()) {
+            throw new BadRequestException(validation.getAllErrors());
+        }
+
+        return fatturaService.updateFattura(idFatture, body);
+    }
+
 }
 
