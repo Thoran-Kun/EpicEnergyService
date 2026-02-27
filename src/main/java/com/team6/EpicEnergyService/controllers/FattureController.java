@@ -45,7 +45,7 @@ public class FattureController {
     @GetMapping("")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     public Page<Fattura> getFatture(@RequestParam(defaultValue = "0") int page,
-                                    @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
+                                    @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "idFatture") String sortBy) {
         return fatturaService.getFatture(page, size, sortBy);
     }
 
@@ -89,6 +89,21 @@ public class FattureController {
             @RequestParam double importoMax
     ) {
         return fatturaService.findByImportoBetween(importoMin, importoMax);
+    }
+
+    // MODIFICA FATTURE
+    @PutMapping("/{idFatture}")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public Fattura updateFattura(
+            @PathVariable UUID idFatture,
+            @RequestBody @Validated FattureDTO body,
+            BindingResult validation
+    ) {
+        if (validation.hasErrors()) {
+            throw new BadRequestException(validation.getAllErrors());
+        }
+
+        return fatturaService.updateFattura(idFatture, body);
     }
 
 }

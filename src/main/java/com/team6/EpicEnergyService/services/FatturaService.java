@@ -52,11 +52,13 @@ public class FatturaService {
 
         // creo la nuova fattura
         Fattura nuovaFattura = new Fattura(payload.importo(), cliente, stato);
+        //aggiungo la fattura alla lista fatture del cliente collegato
+        cliente.getListaFatture().add(nuovaFattura);
+        clienteService.updateFatture(cliente, nuovaFattura);
 
         // incremento il numero di fattura
         int nextNumero = (int) fatturaRepository.count() + 1;
         nuovaFattura.setNumero(nextNumero);
-
 
         return fatturaRepository.save(nuovaFattura);
 
@@ -79,18 +81,26 @@ public class FatturaService {
 
 
     // modifico la fattura (campi importo e stato)
-    public Fattura updateFattura(UUID fatturaId, FattureDTO body, EnumStatoFattura nuovoStato) {
+    public Fattura updateFattura(UUID fatturaId, FattureDTO body) {
+
         // prendo la fattura
         Fattura fattura = this.findById(fatturaId);
+
+        // prendo il cliente
+        Cliente cliente = clienteService.findById(body.clienteId());
+
         // prendo lo stato della fattura
-        StatoFattura stato = statoFatturaService.findByStato(nuovoStato);
-        // modifico lo stato
-        fattura.setStatoFattura(stato);
-        // modifico l'importo
+        StatoFattura stato = statoFatturaService.findByStato(body.stato());
+
+        // aggiorno i campi
         fattura.setImporto(body.importo());
-        // la salvo
+        fattura.setCliente(cliente);
+        fattura.setStatoFattura(stato);
+
+        // salvo
         return fatturaRepository.save(fattura);
     }
+
 
     // elimino la fattura per id
     public void findByIdAndDelete(UUID fatturaId) {

@@ -1,6 +1,7 @@
 package com.team6.EpicEnergyService.tools;
 
 import com.team6.EpicEnergyService.entities.Cliente;
+import com.team6.EpicEnergyService.entities.Fattura;
 import kong.unirest.core.HttpResponse;
 import kong.unirest.core.JsonNode;
 import kong.unirest.core.Unirest;
@@ -37,9 +38,20 @@ public class EmailSender {
         }
     }
 
-    public void sendBilingEmail(Cliente recipient) {
-    }
+//    public void sendBilingEmail(Cliente recipient) {
+//    }
 
-    public void sendInvoiceEmail(Cliente recipient) {
+    public void inviaFattura(Cliente cliente, Fattura fattura) {
+        HttpResponse<JsonNode> response = Unirest.post("https://api.mailgun.net/v3/" + this.domain + "/messages").basicAuth("api", apiKey)
+                .queryString("from", emailFrom)
+                .queryString("to", cliente.getEmailContatto())
+                .queryString("subject", "Ecco i dati della tua ultima fattura:")
+                .queryString("text", "Fattura emessa in data:" + fattura.getData() + " con importo: " + fattura.getImporto() + " €.")
+                .asJson();
+        if (response.getStatus() == 200) {
+            System.out.println("Email inviata con successo");
+        } else {
+            System.out.println("Errore in Mailgun: " + response.getBody());
+        }
     }
 }
