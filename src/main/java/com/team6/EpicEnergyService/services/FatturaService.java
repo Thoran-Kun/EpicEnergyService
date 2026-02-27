@@ -52,11 +52,13 @@ public class FatturaService {
 
         // creo la nuova fattura
         Fattura nuovaFattura = new Fattura(payload.importo(), cliente, stato);
+        //aggiungo la fattura alla lista fatture del cliente collegato
+        cliente.getListaFatture().add(nuovaFattura);
+        clienteService.updateFatture(cliente, nuovaFattura);
 
         // incremento il numero di fattura
         int nextNumero = (int) fatturaRepository.count() + 1;
         nuovaFattura.setNumero(nextNumero);
-
 
         return fatturaRepository.save(nuovaFattura);
 
