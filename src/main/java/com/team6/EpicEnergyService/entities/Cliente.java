@@ -57,13 +57,6 @@ public class Cliente {
         this.telefonoContatto = telefono;
         this.ragioneSociale = ragioneSociale;
         this.partitaIva = partitaIva;
-        if (!listaFatture.isEmpty()) {
-            this.dataUltimoContatto = listaFatture.get(listaFatture.size() - 1).getData();
-            this.fatturatoAnnuale = listaFatture.stream().mapToDouble(Fattura::getImporto).sum();
-        } else {
-            this.dataUltimoContatto = null;
-            this.fatturatoAnnuale = 0.0;
-        }
         this.pec = emailContatto;
     }
 }

@@ -60,7 +60,6 @@ public class FatturaService {
         int nextNumero = (int) fatturaRepository.count() + 1;
         nuovaFattura.setNumero(nextNumero);
 
-
         return fatturaRepository.save(nuovaFattura);
 
     }

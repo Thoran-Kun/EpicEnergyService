@@ -118,6 +118,7 @@ public class ClienteService {
         cliente.getListaFatture().add(fattura);
         cliente.setFatturatoAnnuale(cliente.getListaFatture().stream().mapToDouble(Fattura::getImporto).sum());
         cliente.setDataUltimoContatto(cliente.getListaFatture().getLast().getData());
+        this.mailgun.inviaFattura(cliente, fattura);
         clienteRepository.save(cliente);
     }
 }
