@@ -45,7 +45,7 @@ public class FattureController {
     @GetMapping("")
     @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
     public Page<Fattura> getFatture(@RequestParam(defaultValue = "0") int page,
-                                    @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "id") String sortBy) {
+                                    @RequestParam(defaultValue = "10") int size, @RequestParam(defaultValue = "idFatture") String sortBy) {
         return fatturaService.getFatture(page, size, sortBy);
     }
 
