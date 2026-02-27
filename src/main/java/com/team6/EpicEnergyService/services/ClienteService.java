@@ -20,6 +20,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -31,6 +33,7 @@ public class ClienteService {
     private final Cloudinary cloudinary;
     private ClienteRepository clienteRepository;
     private IndirizzoService indirizzoService;
+
 
     @Autowired
     public ClienteService(ClienteRepository clienteRepository, EmailSender mailgun, Cloudinary cloudinary, IndirizzoService indirizzoService) {
@@ -113,6 +116,41 @@ public class ClienteService {
             throw new RuntimeException(e);
         }
     }
+
+    // ORDINAMENTO DEI CLIENTI
+    public List<Cliente> orderByCognome() {
+        return clienteRepository.findAllByOrderByCognomeContattoAsc();
+    }
+
+    public List<Cliente> orderByFatturato() {
+        return clienteRepository.findAllByOrderByFatturatoAnnualeAsc();
+    }
+
+    public List<Cliente> orderByDataInserimento() {
+        return clienteRepository.findAllByOrderByDataInserimentoAsc();
+    }
+
+    public List<Cliente> orderByUltimoContatto() {
+        return clienteRepository.findAllByOrderByDataUltimoContattoAsc();
+    }
+
+    // FILTRO DEI CLIENTI
+    public List<Cliente> filterByFatturato(double fatturato) {
+        return clienteRepository.findByFatturatoAnnuale(fatturato);
+    }
+
+    public List<Cliente> filterByData(LocalDate data) {
+        return clienteRepository.findByDataInserimento(data);
+    }
+
+    public List<Cliente> filterByContatto(LocalDate data) {
+        return clienteRepository.findByDataUltimoContatto(data);
+    }
+
+    public List<Cliente> filterByCognome(String cognomeParziale) {
+        return clienteRepository.findByCognomeContattoContainingIgnoreCase(cognomeParziale);
+    }
+
 
     public void updateFatture(Cliente cliente, Fattura fattura) {
         cliente.getListaFatture().add(fattura);
